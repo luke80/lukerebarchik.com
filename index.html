@@ -1,978 +1,376 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr"
-	prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# "
-	class=" js">
-
+<!doctype html>
+<html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta charset="utf-8">
-	<meta name="MobileOptimized" content="width">
-	<meta name="HandheldFriendly" content="true">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
-	<title>Luke Rebarchik</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css" media="all">
-	<link rel="stylesheet" href="css/custom-style.css" media="all">
-	<link rel="stylesheet" href="css/__main.css" media="all">
-	<link rel="stylesheet" href="css/font-awesome.css" media="all">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Luke Rebarchik</title>
+<meta name="description" content="Luke Rebarchik, senior solutions architect. Recent work: Illinois DCFS data systems overhaul, Northern Trust public websites, Farm Journal media platforms. Available for contract and fractional work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9QFZLHV9WK"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-9QFZLHV9WK"></script>
-	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
+gtag('config', 'G-9QFZLHV9WK');
+</script>
+<style>
+/* Layout: a systems drawing sheet. Expanded-type hero, three recent-project panels,
+   then sections on a grid with a mono "spec" rail on the left of each section. */
+:root{
+  --paper:#F3F5F4; --panel:#E7ECEA; --ink:#14212B; --muted:#52606A;
+  --line:#C9D2D0; --accent:#0F6E78; --accent-ink:#FFFFFF; --signal:#C98A12;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0F171D; --panel:#16222A; --ink:#E4ECEA; --muted:#97A6AC;
+  --line:#2A3943; --accent:#4FB7C1; --accent-ink:#0B1418; --signal:#E2AE45; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0F171D; --panel:#16222A; --ink:#E4ECEA; --muted:#97A6AC;
+  --line:#2A3943; --accent:#4FB7C1; --accent-ink:#0B1418; --signal:#E2AE45; color-scheme:dark}
 
-	gtag('config', 'G-9QFZLHV9WK');
-	</script>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{font-family:var(--display);font-variation-settings:"wdth" 112;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;font-size:.92rem}
+nav a:hover{color:var(--ink)}
+@media (max-width:640px){nav{display:none}}
+
+.hero .wrap{padding-block:72px 56px;display:grid;gap:26px}
+.status{display:inline-flex;align-items:center;gap:10px}
+.status i{width:9px;height:9px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 4px color-mix(in srgb,var(--signal) 25%,transparent)}
+h1{font-family:var(--display);font-variation-settings:"wdth" 125;font-weight:800;font-size:clamp(2.6rem,7.4vw,5.6rem);line-height:.98;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1 span{display:block}
+h1 span:last-child{color:var(--accent)}
+.lede{font-size:1.18rem;max-width:58ch;margin:0}
+.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-block;padding:12px 20px;font-weight:600;text-decoration:none;border:1.5px solid var(--accent);font-size:.98rem}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{color:var(--accent)}
+.where{color:var(--muted);font-size:.95rem}
+
+/* recent work panels */
+.recent{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+.recent .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding-block:0}
+.proj{padding:30px 26px 32px;border-left:1px solid var(--line);display:grid;gap:10px;align-content:start}
+.proj:first-child{border-left:0;padding-left:0}
+.proj .when{font-family:var(--mono);font-size:.8rem;color:var(--accent);font-variant-numeric:tabular-nums}
+.proj b{font-family:var(--display);font-variation-settings:"wdth" 100;font-weight:700;font-size:2.2rem;line-height:1}
+.proj h3{margin:0;font-size:1.1rem;font-weight:600;line-height:1.3}
+.proj p{margin:0;font-size:.95rem;color:var(--muted)}
+@media (max-width:860px){.recent .wrap{grid-template-columns:1fr}.proj{border-left:0;padding-left:0;padding-right:0}.proj+.proj{border-top:1px solid var(--line)}}
+
+section.block .wrap{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;padding-block:72px;border-bottom:1px solid var(--line)}
+.rail{display:grid;gap:8px;align-content:start;position:sticky;top:90px}
+.rail .mono:first-child{color:var(--accent)}
+h2{font-family:var(--display);font-variation-settings:"wdth" 118;font-weight:800;font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.05;margin:0 0 12px;text-wrap:balance}
+.intro{max-width:60ch;color:var(--muted);margin:0 0 32px}
+@media (max-width:760px){section.block .wrap{grid-template-columns:1fr;gap:14px;padding-block:52px}.rail{position:static}}
+
+.services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+.svc{padding:26px 26px 28px 0;border-bottom:1px solid var(--line);display:grid;gap:8px;align-content:start}
+.svc:nth-child(even){padding-left:26px;padding-right:0;border-left:1px solid var(--line)}
+.svc h3{font-size:1.2rem;margin:0;font-weight:600}
+.svc p{margin:0;font-size:.98rem}
+.svc .proofline{font-size:.88rem;color:var(--muted);border-left:2px solid var(--signal);padding-left:10px}
+@media (max-width:760px){.services{grid-template-columns:1fr}.svc,.svc:nth-child(even){padding:22px 0;border-left:0}}
+
+.modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.mode{border:1px solid var(--line);padding:22px;display:grid;gap:8px;align-content:start}
+.mode h3{margin:0;font-size:1.1rem}
+.mode p{margin:0;font-size:.95rem;color:var(--muted)}
+@media (max-width:860px){.modes{grid-template-columns:1fr}}
+
+.tl{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.tl > li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding:24px 0;border-bottom:1px solid var(--line)}
+.tl .when{font-family:var(--mono);font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px}
+.tl h3{margin:0;font-size:1.12rem;font-weight:600}
+.tl .org{color:var(--accent);font-weight:500}
+.tl .meta{font-size:.88rem;color:var(--muted);margin:2px 0 8px}
+.tl p{margin:0;max-width:66ch;font-size:.98rem}
+.tl ul{margin:8px 0 0;padding-left:18px;max-width:66ch;font-size:.95rem}
+.tl ul li{padding:2px 0}
+@media (max-width:600px){.tl > li{grid-template-columns:1fr;gap:4px}}
+
+.earlier-h{margin:44px 0 6px;font-size:1.05rem;font-weight:600}
+.earlier{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.earlier li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.earlier .when{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:2px}
+.earlier b{font-weight:600}
+.earlier span.d{color:var(--muted)}
+@media (max-width:600px){.earlier li{grid-template-columns:1fr;gap:2px}}
+
+.quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 40px}
+blockquote{margin:0;display:grid;gap:12px;align-content:start}
+blockquote p{margin:0;font-size:1.02rem;line-height:1.55}
+blockquote p::before{content:"\201C";color:var(--accent);font-family:var(--display);font-weight:800;font-size:1.6em;line-height:0;vertical-align:-.35em;margin-right:4px}
+blockquote footer{font-size:.88rem;color:var(--muted)}
+blockquote footer b{color:var(--ink);font-weight:600}
+@media (max-width:760px){.quotes{grid-template-columns:1fr}}
+
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.skills h3{font-size:.95rem;margin:0 0 10px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:.85rem;padding:4px 10px;background:var(--panel);border:1px solid var(--line)}
+.creds{margin-top:36px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.creds div{display:grid;gap:4px}
+.creds p{margin:0;font-size:.95rem}
+@media (max-width:860px){.skills{grid-template-columns:1fr}.creds{grid-template-columns:1fr}}
+
+.contact{background:var(--ink);color:var(--paper)}
+.contact .wrap{padding-block:72px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px}
+.contact h2{color:var(--paper)}
+.contact p{color:color-mix(in srgb,var(--paper) 80%,var(--ink));max-width:56ch}
+.contact .mono{color:color-mix(in srgb,var(--paper) 65%,var(--ink))}
+.contact ul{margin:0;padding:0;list-style:none;border-top:1px solid color-mix(in srgb,var(--paper) 25%,var(--ink))}
+.contact li{padding:14px 0;border-bottom:1px solid color-mix(in srgb,var(--paper) 25%,var(--ink))}
+.contact .btn.primary{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+@media (max-width:760px){.contact .wrap{grid-template-columns:1fr;padding-block:52px}}
+footer.bottom .wrap{padding-block:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
 
 </head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Luke Rebarchik</a>
+    <nav aria-label="Main"><ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#engage">Hire me</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="status mono"><i aria-hidden="true"></i>Available now · Contract &amp; fractional</div>
+      <h1><span>Data systems.</span><span>Public websites.</span><span>Rebuilt right.</span></h1>
+      <p class="lede">Senior solutions architect. Most recently I led planning and development for a complete overhaul of the Illinois Department of Children and Family Services' internal data systems. Before that, four years at Northern Trust, ending as VP of Public Websites.</p>
+      <div class="cta">
+        <a class="btn primary" href="#contact">Start a conversation</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/lrebarchik/" target="_blank" rel="noopener">LinkedIn profile</a>
+      </div>
+      <div class="where">Wilmette, IL · Hybrid or remote · 25+ years leading technology teams</div>
+    </div>
+  </section>
+
+  <div class="recent" aria-label="Recent work">
+    <div class="wrap">
+      <div class="proj">
+        <span class="when">2024 – 2026</span>
+        <b>Illinois DCFS</b>
+        <h3>Internal data systems overhaul</h3>
+        <p>Senior Solutions Architect via Krasan Consulting. Led development and planning for a complete overhaul of the department's internal data systems.</p>
+      </div>
+      <div class="proj">
+        <span class="when">2019 – 2024</span>
+        <b>Northern Trust</b>
+        <h3>Contractor to VP of Public Websites</h3>
+        <p>Joined on contract, converted to Lead Solutions Architect, then promoted to Senior Solutions Architect, VP of Public Websites.</p>
+      </div>
+      <div class="proj">
+        <span class="when">2017 – 2019</span>
+        <b>44M+</b>
+        <h3>Monthly engagements at Farm Journal</h3>
+        <p>Designed and supported the infrastructure behind the company's websites, newsletters, apps and paid data products.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="rail"><span class="mono">Services</span><span class="mono">What I do</span></div>
+      <div>
+        <h2>What I do</h2>
+        <p class="intro">Four things, each backed by work I've led.</p>
+        <div class="services">
+          <div class="svc">
+            <h3>Overhaul data systems</h3>
+            <p>Plan the replacement and lead the build.</p>
+            <div class="proofline">Illinois DCFS (2024–2026)</div>
+          </div>
+          <div class="svc">
+            <h3>Run enterprise web platforms</h3>
+            <p>Architecture, configuration, performance and security for large public web estates.</p>
+            <div class="proofline">Northern Trust public websites; Farm Journal's 44M+ monthly engagements</div>
+          </div>
+          <div class="svc">
+            <h3>Bring in DevOps</h3>
+            <p>Docker, automated testing and deployment automation for local and international teams.</p>
+            <div class="proofline">Farm Journal Media</div>
+          </div>
+          <div class="svc">
+            <h3>Choose and launch CRM</h3>
+            <p>Vendor selection, RFPs, implementation and adoption.</p>
+            <div class="proofline">SuiteCRM at Farm Journal; Microsoft Dynamics CRM at BYU</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="experience">
+    <div class="wrap">
+      <div class="rail"><span class="mono">Experience</span><span class="mono">Last 9 years</span></div>
+      <div>
+        <h2>Recent roles</h2>
+        <p class="intro">2017 to 2026, most recent first.</p>
+        <ol class="tl">
+          <li>
+            <div class="when">Jul 2024 – Apr 2026</div>
+            <div>
+              <h3>Senior Solutions Architect · <span class="org">Krasan Consulting Services</span></h3>
+              <div class="meta">Contract · Chicago, IL · Hybrid</div>
+              <p>Led development and planning for the Illinois Department of Children and Family Services in a complete overhaul of their internal data systems.</p>
+            </div>
+          </li>
+          <li>
+            <div class="when">Jul 2019 – Jan 2024</div>
+            <div>
+              <h3>Senior Solutions Architect, VP of Public Websites · <span class="org">Northern Trust</span></h3>
+              <div class="meta">Chicago, IL</div>
+              <ul>
+                <li>Senior Solutions Architect, VP of Public Websites, Jul 2020 – Jan 2024</li>
+                <li>Lead Solutions Architect, Nov 2019 – Jul 2020</li>
+                <li>Solutions Architect on contract through Swoon, Jul – Nov 2019, then converted to full-time</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="when">Mar 2019 – Jul 2019</div>
+            <div>
+              <h3>Associate Director of Web Development · <span class="org">Rise Interactive</span></h3>
+              <div class="meta">Chicago, IL</div>
+            </div>
+          </li>
+          <li>
+            <div class="when">Jan 2019 – Mar 2019</div>
+            <div>
+              <h3>Software Development Manager · <span class="org">Photon</span></h3>
+              <div class="meta">Deerfield, IL</div>
+              <p>Built a developer documentation suite directly with Discover Financial Services.</p>
+            </div>
+          </li>
+          <li>
+            <div class="when">Jul 2017 – Jan 2019</div>
+            <div>
+              <h3>Solutions Architect · <span class="org">Farm Journal Media</span></h3>
+              <div class="meta">Chicago, IL · Started as Lead Web Developer (Drupal), promoted Mar 2018</div>
+              <ul>
+                <li>Infrastructure for 44+ million monthly engagements on Drupal 8 and SuiteCRM.</li>
+                <li>Oversaw multiple international development teams.</li>
+                <li>Introduced Docker workflows, Composer packaging, unit testing and deployment automation.</li>
+                <li>Advised on the CRM implementation.</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+
+        <h3 class="earlier-h">Earlier career</h3>
+        <ul class="earlier">
+          <li><span class="when">2011 – 2017</span><span><b>BYU Independent Study</b>, Website Administrator &amp; Business Process Manager. <span class="d">Led the group building Drupal and WordPress modules for all campus sites (35,000+ students). Content problems cut 3x, from 403 to 133. Product hits up 12%+ quarter over quarter.</span></span></li>
+          <li><span class="when">2010 – 2011</span><span><b>Five Star Franchising</b>, Sr. Software and Web Content Designer. <span class="d">Project-managed the SaaS replacement for a .NET CRM and quoting app.</span></span></li>
+          <li><span class="when">2002 – 2010</span><span><b>rWorld Solutions</b>, Co-Founder. <span class="d">Technical consulting and data solutions, including CRM integration.</span></span></li>
+          <li><span class="when">2004 – 2009</span><span><b>Brigham Young University</b>, IT/Data Consultant. <span class="d">Ticketing systems and Visa PCI compliance review.</span></span></li>
+          <li><span class="when">2002 – 2003</span><span><b>Brighton Marketing</b>, Software Developer. <span class="d">Price-tracking data system.</span></span></li>
+          <li><span class="when">1997 – 1999</span><span><b>Apex Interactive</b>, Web Developer and Designer. <span class="d">First-generation e-commerce shopping carts.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="engage">
+    <div class="wrap">
+      <div class="rail"><span class="mono">Engagement</span><span class="mono">How to hire me</span></div>
+      <div>
+        <h2>Three ways to hire me</h2>
+        <p class="intro">Pick what fits your budget and timeline.</p>
+        <div class="modes">
+          <div class="mode"><span class="mono">Contract</span><h3>On your team</h3><p>Full-time contract. Chicago-area hybrid or remote.</p></div>
+          <div class="mode"><span class="mono">Fractional</span><h3>A few days a week</h3><p>Senior architecture without a full-time hire.</p></div>
+          <div class="mode"><span class="mono">Project</span><h3>Fixed-scope review</h3><p>An assessment of your architecture, platform or rollout, with a written recommendation.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="recommend">
+    <div class="wrap">
+      <div class="rail"><span class="mono">Recommendations</span><span class="mono">BYU colleagues</span></div>
+      <div>
+        <h2>In their words</h2>
+        <div class="quotes">
+          <blockquote>
+            <p>Luke is an exceptional collaborator who excels at reaching across departments and programs to develop truly innovat[iv]e solutions and bring people together in pursuit of a shared vision.</p>
+            <footer><b>Wendy Simmerman</b> · Head of Tutors &amp; TAs, BYU Independent Study</footer>
+          </blockquote>
+          <blockquote>
+            <p>Luke constantly searches for more efficient means to accomplishing tasks and collecting meaningful data. He is consistent in his search for a clear direction and path to accomplish the big picture.</p>
+            <footer><b>Brian Pendleton</b> · Educational Services Administrator, Brigham Young University</footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="skills">
+    <div class="wrap">
+      <div class="rail"><span class="mono">Toolkit</span></div>
+      <div>
+        <h2>Toolkit</h2>
+        <div class="skills">
+          <div><h3>Cloud and delivery</h3><div class="chips"><span>AWS</span><span>Microsoft Azure</span><span>DevOps</span><span>Docker</span><span>Composer</span><span>Git</span><span>Automated testing</span></div></div>
+          <div><h3>Platforms and CRM</h3><div class="chips"><span>Drupal 8</span><span>WordPress</span><span>SuiteCRM</span><span>Microsoft Dynamics CRM</span><span>Salesforce</span><span>.NET</span><span>SQL Server</span></div></div>
+          <div><h3>Practice</h3><div class="chips"><span>Project management</span><span>System architecture</span><span>JavaScript</span><span>Google Analytics</span><span>Tableau</span><span>WCAG</span></div></div>
+        </div>
+        <div class="creds">
+          <div><span class="mono">Education</span><p>Brigham Young University, BA, Theatre Arts Management / Acting</p></div>
+          <div><span class="mono">Languages</span><p>English (native) · German (professional working proficiency)</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div>
+        <span class="mono">Contact</span>
+        <h2>Let's talk.</h2>
+        <p>Message me on LinkedIn with what you're working on and the technologies involved.</p>
+        <div class="cta"><a class="btn primary" href="https://www.linkedin.com/in/lrebarchik/" target="_blank" rel="noopener">Message me on LinkedIn</a></div>
+      </div>
+      <div>
+        <span class="mono">Reach out about</span>
+        <ul>
+          <li>A contract or fractional architect role</li>
+          <li>A system or platform decision</li>
+          <li>Professional references</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bottom">
+  <div class="wrap mono"><span>© 2026 Luke Rebarchik</span><span>Wilmette, Illinois</span></div>
+</footer>
 
-<body class="path-frontpage">
-	<a href="#main-content" class="visually-hidden focusable skip-link">
-		Skip to main content
-	</a>
-
-	<!-- Header and Navbar -->
-	<header class="main-header" id="top">
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="container">
-				<div class="row">
-					<div class="navbar-header">
-
-						<div class="region region-header">
-							<div id="block-personal-promotion-drupal8-branding"
-								class="site-branding block block-system block-system-branding-block">
-
-								<div class="brand logo">
-									<a href="https://lukerebarchik.com/" title="Home" rel="home"
-										class="site-branding__logo">
-										<img src="img/logo-luke.svg" alt="Home">
-									</a>
-								</div>
-								<div class="brand site-name">
-									<div class="site-branding__name">
-										<a href="https://lukerebarchik.com/" title="Home" rel="home">Luke Rebarchik</a>
-									</div>
-								</div>
-							</div>
-
-						</div>
-
-					</div>
-
-					<!-- Navigation -->
-					<div class="col-md-9">
-						<div class="region region-primary-menu">
-							<nav role="navigation" aria-labelledby="block-personal-promotion-drupal8-main-menu-menu"
-								id="block-personal-promotion-drupal8-main-menu">
-
-								<h2 class="visually-hidden" id="block-personal-promotion-drupal8-main-menu-menu">Main
-									navigation</h2>
-
-								<ul class="sm menu-base-theme" id="main-menu" data-smartmenus-id="170171489330763">
-									<li>
-										<a href="/#jobs" title="Positions Luke has held or currently holds"
-											data-drupal-link-system-path="&lt;front&gt;"
-											class="is-active">Experience</a>
-									</li>
-								</ul>
-
-							</nav>
-
-						</div>
-
-					</div>
-					<!--End Navigation -->
-
-				</div>
-			</div>
-		</nav>
-
-		<!-- Banner -->
-
-		<div class="container parallax-item" id="parallax-item-1" style="top: 0px;"></div>
-		<div class="container parallax-item" id="parallax-item-2"></div>
-		<div class="container parallax-item" id="parallax-item-3" style="top: 0px;"></div>
-		<div class="container parallax-item" id="parallax-item-4">
-			<a href="/#jobs">
-				<div class="svg-wrapper">
-					<svg id="Document" class="svg-icon" xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 44.0621 55.6344">
-						<defs>
-							<style>
-								.cls-1 {
-									fill: none;
-									stroke: #000;
-									stroke-linecap: round;
-									stroke-linejoin: round;
-								}
-							</style>
-						</defs>
-						<title>doc-CV</title>
-						<path id="Paper" class="cls-1 path"
-							d="M24.6225,5H48.6907a5.0629,5.0629,0,0,1,5.0629,5.0629V54.5715a5.0629,5.0629,0,0,1-5.0629,5.0629H15.7543a5.0629,5.0629,0,0,1-5.0629-5.0629V18.71L24.6225,5,10.6914,18.71,24.6225,5v8.6468A5.0629,5.0629,0,0,1,19.56,18.71H10.6914"
-							transform="translate(-10.1914 -4.5)"></path>
-						<path id="CV_Label" class="shape" data-name="CV Label"
-							d="M17.657,25.5V39H47V25.5H17.657ZM29.35,36.1172a4.8775,4.8775,0,0,0,1.9893-.3916l0.252,0.9658a6.0408,6.0408,0,0,1-2.4932.4482,4.4118,4.4118,0,0,1-4.6646-4.7764,4.6979,4.6979,0,0,1,4.9307-4.958,5.0656,5.0656,0,0,1,2.2412.42l-0.2944.9941a4.4453,4.4453,0,0,0-1.9048-.3916c-2.2134,0-3.6841,1.4141-3.6841,3.8936C25.7217,34.6328,27.0522,36.1172,29.35,36.1172ZM36.6987,37H35.354l-3.0815-9.4414h1.3164l1.4712,4.65c0.4058,1.2754.7563,2.4238,1.0083,3.53h0.0278c0.2661-1.0928.6587-2.2832,1.0786-3.5156l1.5972-4.665h1.3027Z"
-							transform="translate(-10.1914 -4.5)"></path>
-					</svg>
-					<svg class="border-shape" height="60" width="320" xmlns="http://www.w3.org/2000/svg">
-						<rect class="shape" height="60" width="320"></rect>
-					</svg>
-					<div class="text">Learn more about Luke</div>
-
-				</div>
-			</a>
-		</div>
-		<div class="container welcome-banner-text">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="region region-welcome-banner-text">
-						<div id="block-welcometextfrontpage"
-							class="block block-block-content block-block-contentcb332183-7bf5-48c1-9f3a-58260ea27528">
-
-							<h2>Leadership and Technology Solutions</h2>
-
-							<div>
-								<p>Invite Luke to your team &amp; tap into his experience.</p>
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-		</div>
-		<!-- End Banner -->
-
-	</header>
-	<!--End Header & Navbar -->
-	<!--Quote Carousel-->
-	<div class="region region-quote-carousel">
-		<div class="views-element-container block block-views block-views-blockrecommendations-block-1"
-			id="block-views-block-recommendations-block-1">
-
-			<div>
-				<div class="js-view-dom-id-c5ca483c9e210f83d4a5467c8cb262df95d398182a8abf8efd48bb8646c585e2"
-					id="recommendations">
-
-					<div class="carousel">
-
-						<ul class="carousel-items">
-
-							<li class="carousel-item">
-								<blockquote class="field-content">Beyond
-									incorporating best practices and the mobile first paradigm Luke has
-									designed and configured analytics to inform design and guide
-									enhancements.</blockquote>
-								<footer class="field-content recommendation-cite">William Dastrup, Business Process and
-									Systems Engineer; Brigham Young University</footer>
-							</li>
-							<li class="carousel-item">
-								<blockquote class="field-content">Luke
-									is an exceptional collaborator who excels at reaching across
-									departments and programs to develop truly innovate solutions and bring
-									people together in pursuit of a shared vision.</blockquote>
-								<footer class="field-content recommendation-cite">Wendy Simmerman, Head of Tutors &amp;
-									TAs; Brigham Young University, Independent Study</footer>
-							</li>
-							<li class="carousel-item">
-								<blockquote class="field-content">Luke
-									constantly searches for more efficient means to accomplishing tasks and
-									collecting meaningful data. He is consistent in his search for a clear
-									direction and path to accomplish the big picture.</blockquote>
-								<footer class="field-content recommendation-cite">Brian Pendleton, Educational Services
-									Administrator; Brigham Young University</footer>
-							</li>
-
-						</ul>
-
-					</div>
-
-				</div>
-			</div>
-
-		</div>
-
-	</div>
-
-	<!--End Quote Carousel-->
-	<!--Parallax item 5-->
-
-	<div class="container parallax-item" id="parallax-item-5"></div>
-	<!--End Parallax item 5-->
-
-	<!--Highlighted-->
-	<div class="container">
-		<div class="row">
-			<div class="region region-highlighted">
-
-			</div>
-
-		</div>
-	</div>
-	<!--End Highlighted-->
-
-	<!-- Start Top Widget -->
-
-	<!--End Top Widget -->
-
-	<!-- Page Title -->
-	<!-- End Page Title ---- >
-
-
-<!-- layout -->
-	<div id="wrapper">
-		<!-- start: Container -->
-		<div class="container">
-
-			<!--Content top-->
-			<!--End Content top-->
-
-			<!--start:content -->
-			<div class="row">
-				<div class="col-md-12"></div>
-			</div>
-
-			<div class="row layout">
-				<!--- Start Left SideBar -->
-				<!---End Right SideBar -->
-
-				<!--- Start content -->
-				<div class="content_layout">
-					<div class="col-md-12">
-						<div class="region region-content">
-							<div id="block-personal-promotion-drupal8-content"
-								class="block block-system block-system-main-block">
-
-								<div class="views-element-container">
-									<div class="js-view-dom-id-c75a5cb8574d778b43655c7fae894b8dca64d58089dac1ed4ec7cee0e9e39e26"
-										id="frontpage">
-
-										<div class="views-row">
-											<div class="views-field views-field-title">
-												<h3 class="field-content introduction">Who is Luke?</h3>
-											</div>
-											<div class="views-field views-field-body">
-												<div class="field-content">
-													<section class="doorbell-sides">
-														<h1 class="left visually-hidden">Luke Rebarchik</h1>
-
-														<div class="left">Experienced technology strategist; able to
-															bring
-															technology’s role in business into sharp focus by
-															identifying the
-															customer and&nbsp;understanding the information which serves
-															them. I build those around me, and&nbsp;excel at
-															understanding, valuing, and&nbsp;producing well-architected,
-															compelling
-															customer experiences.</div>
-
-														<div class="right">Invite me to participate on your board, hire
-															me to
-															lead your UI/UX design team (or ask me anything you like)
-															and&nbsp;I am
-															happy to bring my expertise to your customers through tried
-															and&nbsp;proven methods, as well as new bespoke innovations
-															based on
-															demonstrated needs.</div>
-													</section>
-													<figure class="doorbell"><img
-															alt="Luke Rebarchik at Aspen Grove in Utah"
-															class="circle-image luke-face" data-entity-type="file"
-															data-entity-uuid="03a6262e-01e1-4630-9f9a-cc74b33b900f"
-															src="img/luke_aspengrove_black-white.jpg">
-													</figure>
-												</div>
-											</div>
-										</div>
-
-										<a href="http://lukerebarchik.com/rss.xml" class="feed-icon">
-											Subscribe to
-										</a>
-
-									</div>
-								</div>
-
-							</div>
-
-						</div>
-
-					</div>
-				</div>
-				<!---End content -->
-
-				<!--- Start Right SideBar -->
-				<!---End Right SideBar -->
-
-			</div>
-			<!--End Content -->
-
-			<!--Start Content Bottom-->
-			<!--End Content Bottom-->
-		</div>
-	</div>
-	<!-- End layout -->
-
-	<!-- Start bottom -->
-
-	<!--End Bottom -->
-
-	<!-- start: Footer -->
-	<div class="footerwidget">
-		<div class="container">
-
-			<div class="row">
-
-				<!-- Start Footer First Region -->
-				<div class="col-md-6">
-					<div class="region region-footer-first">
-						<div class="views-element-container block block-views block-views-blockjobs-block-1"
-							id="block-views-block-jobs-block-1">
-
-							<h2>Employment History</h2>
-
-							<div>
-								<div class="job-articles js-view-dom-id-a2f46946b99d873ba2009b1002b8171d1f2a58db634e5ce58e4310da7263036e"
-									id="jobs">
-
-
-
-									<div class="job-article views-row">
-										<div class="views-field views-field-title">
-											<h3 class="field-content">Senior Solutions Architect, VP of Public Websites
-											</h3>
-										</div>
-										<div class="views-field views-field-field-company"><span
-												class="views-label views-label-field-company visually-hidden">Employer:
-											</span>
-											<h4 class="field-content job-company">Northern Trust</h4>
-										</div>
-										<div class="views-field views-field-field-dates-of-employment"><span
-												class="views-label views-label-field-dates-of-employment visually-hidden">Employment
-												Dates: </span>
-											<h5 class="field-content">Aug&nbsp;2019</h5>
-										</div>
-										<div class="views-field views-field-field-employment-end-date">
-											<h5 class="field-content">Jan&nbsp;2024</h5>
-										</div>
-										<div class="views-field views-field-body"><span
-												class="views-label views-label-body visually-hidden">Job Description:
-											</span>
-											<div class="field-content">
-												<p>
-													Northern Trust is a world influencer in private banking, and I
-													served them as the primary technical party responsible for the
-													stability and uptime of the main marketing website. This role began
-													as a contract-to-hire & was quickly turned into a full-time
-													position. Primary task: decision &
-													adoption process of new CMS back-end for northerntrust.com. As a
-													senior leader, provided leadership and
-													direction of multiple projects’ requirements, budgeting, &
-													architectural planning. Led development teams delivering 9+ website
-													projects. Primary technologies
-													involved: Pivotal Cloud Foundry, Microsoft Azure, Amazon AWS, Adobe
-													Managed Services, Adobe Experience
-													Manager, Teamsite/Livesite, Java, javascript/typescript, & more.</p>
-											</div>
-										</div>
-										<div class="views-field views-field-field-responsibility"><span
-												class="views-label views-label-field-responsibility">Skills &
-												Responsibilities:
-											</span>
-											<div class="field-content">
-												<ul>
-													<li>Technical design; architected solutions within existing systems
-														& adoption / construction of new systems</li>
-													<li>Planning; quickly document & understand technical landscape to
-														position & execute</li>
-													<li>Strategic allocation; deliver reliable results with a limited
-														team through use of remote resources</li>
-													<li>Leadership; decide based on complex client relationships & align
-														regularly with changing needs</li>
-												</ul>
-											</div>
-										</div>
-										<div class="views-field views-field-field-outcome"><span
-												class="views-label views-label-field-outcome">Outcomes: </span><span
-												class="field-content">
-												<ul>
-													<li>Successfully transitioned 2k+ pages of content from old CMS to
-														new.</li>
-													<li>Enabled seamless transition of marketing efforts, significantly
-														reducing time to delivery.</li>
-												</ul>
-											</span></div>
-										<div class="views-field views-field-field-supervisor"><span
-												class="views-label views-label-field-supervisor">Supervisors: </span>
-											<div class="field-content">
-												<ul>
-													<li>Lori Roth</li>
-													<li>Silvia Lazaro</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-article views-row">
-										<div class="views-field views-field-title">
-											<h3 class="field-content">Associate Director Of Web Development</h3>
-										</div>
-										<div class="views-field views-field-field-company"><span
-												class="views-label views-label-field-company visually-hidden">Employer:
-											</span>
-											<h4 class="field-content job-company">Rise Interactive, Chicago, Illinois
-											</h4>
-										</div>
-										<div class="views-field views-field-field-dates-of-employment"><span
-												class="views-label views-label-field-dates-of-employment visually-hidden">Employment
-												Dates: </span>
-											<h5 class="field-content">March&nbsp;2019</h5>
-										</div>
-										<div class="views-field views-field-field-employment-end-date">
-											<h5 class="field-content">July&nbsp;2019</h5>
-										</div>
-										<div class="views-field views-field-body"><span
-												class="views-label views-label-body visually-hidden">Job Description:
-											</span>
-											<div class="field-content">
-												<p>This contract role included leadership and direction of multiple
-													project teams. Rise is a leading marketing firm in
-													downtown Chicago. I prepared bids and proposal decks and presented
-													them to clients with members of my team. I
-													participated in 4 $1m+ projects and directly shaped and directed 3
-													in the short contract time I worked with Rise.
-													Primary technologies involved; Kentico, SiteCore, Drupal, .net, C#,
-													php, Microsoft Azure, Amazon AWS, and
-													more.</p>
-											</div>
-										</div>
-										<div class="views-field views-field-field-responsibility"><span
-												class="views-label views-label-field-responsibility">Skills &
-												Responsibilities:
-											</span>
-											<div class="field-content">
-												<ul>
-													<li>Director; mentor & supervise managers of multiple
-														international teams</li>
-													<li>Client relationship; investigate & understand client needs personally and strategize how
-														to satisfy them</li>
-													<li>Reproducible results; guide technology decisions to help
-														managers understand how to get
-														work that scales up without extra hours</li>
-													<li>Process improvement; led adoption of a project pattern that
-														maximizes efficiency &
-														encourages reproducible outputs</li>
-												</ul>
-											</div>
-										</div>
-										<div class="views-field views-field-field-outcome"><span
-												class="views-label views-label-field-outcome">Outcomes: </span><span
-												class="field-content">
-												<ul>
-													<li>Delivered 4 projects simultaneously on-time and under-budget
-													</li>
-												</ul>
-											</span></div>
-										<div class="views-field views-field-field-supervisor"><span
-												class="views-label views-label-field-supervisor">Supervisor: </span>
-											<div class="field-content">
-												<ul>
-													<li>Noel Burkman</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-article views-row">
-										<div class="views-field views-field-title">
-											<h3 class="field-content">Web Development Manager</h3>
-										</div>
-										<div class="views-field views-field-field-company"><span
-												class="views-label views-label-field-company visually-hidden">Employer:
-											</span>
-											<h4 class="field-content job-company">Discover Financial Services,
-												Deerfield, Illinois</h4>
-										</div>
-										<div class="views-field views-field-field-dates-of-employment"><span
-												class="views-label views-label-field-dates-of-employment visually-hidden">Employment
-												Dates: </span>
-											<h5 class="field-content">Feb&nbsp;2019</h5>
-										</div>
-										<div class="views-field views-field-field-employment-end-date">
-											<h5 class="field-content">March&nbsp;2019</h5>
-										</div>
-										<div class="views-field views-field-body"><span
-												class="views-label views-label-body visually-hidden">Job Description:
-											</span>
-											<div class="field-content">
-												<p>This contract role involved joining a diverse team of developers
-													mid-project to organize & refocus the team on
-													the requested deliverables. The project was to produce an api
-													documentation site within Drupal. The team was
-													brought on as contractors through a separate company called Photon,
-													which brought with it very specific
-													processes & procedures. Primary technology: Drupal 8 & Acquia</p>
-											</div>
-										</div>
-										<div class="views-field views-field-field-responsibility"><span
-												class="views-label views-label-field-responsibility">Skills &
-												Responsibilities:
-											</span>
-											<div class="field-content">
-												<ul>
-													<li>Agile; the design & development patterns were strongly defined
-														by the company behind the
-														workforce. I learned them quickly & supported</li>
-													<li>Manager; guided both technology & people to more simply satisfy
-														the requirements & minimize
-														wasted effort</li>
-													<li>Patient & determined; people are the most important part of any
-														project, & listening is the best path
-														toward getting to the goal</li>
-													<li>Receptive; both Discover & Photon had extensive company
-														requirements, restrictions, & policies to
-														comply. I researched & led the team to full compliance</li>
-												</ul>
-											</div>
-										</div>
-										<div class="views-field views-field-field-outcome"><span
-												class="views-label views-label-field-outcome">Outcomes: </span><span
-												class="field-content">
-												<ul>
-													<li>Delivered the site aligned to contract parameters</li>
-												</ul>
-											</span></div>
-										<div class="views-field views-field-field-supervisor"><span
-												class="views-label views-label-field-supervisor">Supervisor: </span>
-											<div class="field-content">
-												<ul>
-													<li>Available upon request</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-article views-row">
-										<div class="views-field views-field-title">
-											<h3 class="field-content">Senior Solutions Architect</h3>
-										</div>
-										<div class="views-field views-field-field-company"><span
-												class="views-label views-label-field-company visually-hidden">Employer:
-											</span>
-											<h4 class="field-content job-company">Farm Journal Media, Chicago, Illinois
-											</h4>
-										</div>
-										<div class="views-field views-field-field-dates-of-employment"><span
-												class="views-label views-label-field-dates-of-employment visually-hidden">Employment
-												Dates: </span>
-											<h5 class="field-content">July&nbsp;2017</h5>
-										</div>
-										<div class="views-field views-field-field-employment-end-date">
-											<h5 class="field-content">Jan&nbsp;2019</h5>
-										</div>
-										<div class="views-field views-field-body"><span
-												class="views-label views-label-body visually-hidden">Job Description:
-											</span>
-											<div class="field-content">
-												<p>As Senior Solutions Architect for the nation's leading agricultural
-													b2b information & media company, I
-													designed & supported ui/ux & technical infrastructure for 44+
-													million monthly engagements via
-													branded websites, newsletters & phone apps, including an array of
-													data-driven paid information
-													products. FJ’s technology shapes the agriculture marketplaces of the
-													future. This role required
-													leadership, management & training responsibilities for various
-													internationally distributed agile technical teams. Primary
-													technology; Drupal 8, with SuiteCRM.</p>
-											</div>
-										</div>
-										<div class="views-field views-field-field-responsibility"><span
-												class="views-label views-label-field-responsibility">Skills &
-												Responsibilities:
-											</span>
-											<div class="field-content">
-												<ul>
-													<li>Agile; lead web development to iterate, improve, & deliver
-														sustainable, reliable results</li>
-													<li>Manager; directly oversee the daily work of multiple
-														international teams</li>
-													<li>Continuous improvement; implement unit testing & deployment
-														automation</li>
-													<li>Client-Focused; prioritize user needs. Shepherd technology away
-														from technical debt</li>
-													<li>UI/UX; provide leadership over design choices, developing
-														forward into scalable, clean
-														designs</li>
-													<li>Thought leadership; participate in strategic planning &
-														knowledge sharing</li>
-													<li>Self-starter; comfortable working under general direction to
-														deliver
-														solutions/approaches to ambiguous, time-sensitive business
-														challenges</li>
-													<li>Trainer; onboard new team members & contract employees – assign
-														responsibilities &
-														ensure adequate understanding to ramp up efficiently</li>
-													<li>Excellent communicator; skilled at explaining complex technical
-														concepts to
-														nontechnical business stakeholders. Simple, eloquent
-														documentation author</li>
-													<li>Data Platforms; quickly identify business problems or technology
-														patterns driving
-														technology requests to understand requirements & design for
-														optimal UX</li>
-												</ul>
-											</div>
-										</div>
-										<div class="views-field views-field-field-outcome"><span
-												class="views-label views-label-field-outcome">Outcomes: </span><span
-												class="field-content">
-												<ul>
-													<li>Planned & unified standard update distribution of custom code to
-														40+ separate sites</li>
-													<li>Researched and implemented technical solution to comply with
-														GDPR & CCPA</li>
-												</ul>
-											</span></div>
-										<div class="views-field views-field-field-supervisor"><span
-												class="views-label views-label-field-supervisor">Supervisor: </span>
-											<div class="field-content">
-												<ul>
-													<li>John Burr</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-
-									<div class="job-article views-row">
-										<div class="views-field views-field-title">
-											<h3 class="field-content">Systems Engineer, Web & Business
-												Process Administrator</h3>
-										</div>
-										<div class="views-field views-field-field-company"><span
-												class="views-label views-label-field-company visually-hidden">Employer:
-											</span>
-											<h4 class="field-content job-company">Independent Study - Brigham Young
-												University</h4>
-										</div>
-										<div class="views-field views-field-field-dates-of-employment"><span
-												class="views-label views-label-field-dates-of-employment visually-hidden">Employment
-												Dates: </span>
-											<h5 class="field-content">July&nbsp;2011</h5>
-										</div>
-										<div class="views-field views-field-field-employment-end-date">
-											<h5 class="field-content">July&nbsp;2017</h5>
-										</div>
-										<div class="views-field views-field-body"><span
-												class="views-label views-label-body visually-hidden">Job Description:
-											</span>
-											<div class="field-content">
-												<p>This
-													position began as a web content manager, development administrator,
-													supervisor, and&nbsp;general web development officer. Over time I
-													accrued more responsibilities and&nbsp;leadership. I am now the lead
-													for
-													our website, and&nbsp;team member for our comprehensive internet
-													technology strategy. I am the main advocate and&nbsp;expert for
-													UI/UX
-													and&nbsp;analytics-based analysis.</p>
-											</div>
-										</div>
-										<div class="views-field views-field-field-responsibility"><span
-												class="views-label views-label-field-responsibility">Skills &
-												Responsibilities:
-											</span>
-											<div class="field-content">
-												<ul>
-													<li>Website design</li>
-													<li>CRM</li>
-													<li>Support administrator</li>
-													<li>Workflow engineer</li>
-													<li>Product strategy</li>
-												</ul>
-											</div>
-										</div>
-										<div class="views-field views-field-field-outcome"><span
-												class="views-label views-label-field-outcome">Outcomes: </span><span
-												class="field-content">
-												<ul>
-													<li>SEO and content strategy increased product hits 12%+ QOQ from
-														2015 to 2016; result 50k to ~61k sales QOQ</li>
-													<li>Transitioned into Microsoft Dynamics CRM; design, adoption, and
-														training</li>
-													<li>Fostered 25+ international partner schools’ content technology
-														and curricula</li>
-													<li>Enhanced data analysis.</li>
-													<li>Content issues reduced by my build process, down by over 3x; 403
-														to 133 YTD</li>
-													<li>University and High School products; technology infrastructure
-													</li>
-													<li>Led cross-functional initiatives to meet and exceed targets for
-														cost management and overhead expense.</li>
-												</ul>
-											</span></div>
-										<div class="views-field views-field-field-supervisor"><span
-												class="views-label views-label-field-supervisor">Supervisors: </span>
-											<div class="field-content">
-												<ul>
-													<li>William Dastrup</li>
-													<li>Russ Bryant</li>
-													<li>Heather Bryce</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div class="job-article views-row">
-										<div class="views-field views-field-title">
-											<h3 class="field-content">Head of Software Development</h3>
-										</div>
-										<div class="views-field views-field-field-company"><span
-												class="views-label views-label-field-company visually-hidden">Employer:
-											</span>
-											<h4 class="field-content job-company">Five Star Franchising</h4>
-										</div>
-										<div class="views-field views-field-field-dates-of-employment"><span
-												class="views-label views-label-field-dates-of-employment visually-hidden">Employment
-												Dates: </span>
-											<h5 class="field-content">March&nbsp;2010</h5>
-										</div>
-										<div class="views-field views-field-field-employment-end-date">
-											<h5 class="field-content">July 2011</h5>
-										</div>
-										<div class="views-field views-field-body"><span
-												class="views-label views-label-body visually-hidden">Job Description:
-											</span>
-											<div class="field-content">
-												<p>Designed
-													and&nbsp;implemented data for self-correction at all levels.
-													Directed
-													training,&nbsp;reports, and&nbsp;marketing collateral. Connected
-													data
-													analysis to training, which&nbsp;ensured 100% coverage of required
-													material. Revamped all tech for international&nbsp;markets (Brazil).
-												</p>
-											</div>
-										</div>
-										<div class="views-field views-field-field-responsibility"><span
-												class="views-label views-label-field-responsibility">Skills &
-												Responsibilities:
-											</span>
-											<div class="field-content">
-												<ul>
-													<li>Software development</li>
-													<li>CRM-based operations</li>
-													<li>Software Support; desktop application</li>
-												</ul>
-											</div>
-										</div>
-										<div class="views-field views-field-field-outcome"><span
-												class="views-label views-label-field-outcome">Outcomes: </span><span
-												class="field-content">
-												<ul>
-													<li>Technology
-														Infrastructure Strategy — Directed software, telephony, email,
-														and data
-														for US and Brazilian offices; Brazil (new) grossed $150k+ the first
-														year and $1mil+ in second</li>
-													<li>Amazon Cloud servers — reduced hardware overhead from $50k/y+ to
-														$12k/y-</li>
-												</ul>
-											</span></div>
-										<div class="views-field views-field-field-supervisor"><span
-												class="views-label views-label-field-supervisor">Supervisor: </span>
-											<div class="field-content">
-												<ul>
-													<li>Conrad Kolba</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div class="job-article views-row">
-										<div class="views-field views-field-title">
-											<h3 class="field-content">Co-Founder</h3>
-										</div>
-										<div class="views-field views-field-field-company"><span
-												class="views-label views-label-field-company visually-hidden">Employer:
-											</span>
-											<h4 class="field-content job-company">rWorld Solutions</h4>
-										</div>
-										<div class="views-field views-field-field-dates-of-employment"><span
-												class="views-label views-label-field-dates-of-employment visually-hidden">Employment
-												Dates: </span>
-											<h5 class="field-content">May&nbsp;2002</h5>
-										</div>
-										<div class="views-field views-field-field-employment-end-date">
-											<h5 class="field-content">March 2010</h5>
-										</div>
-										<div class="views-field views-field-body"><span
-												class="views-label views-label-body visually-hidden">Job Description:
-											</span>
-											<div class="field-content">
-												<p>Integrated data services. Automated reporting and&nbsp;CRM
-													integration for content;<br>
-													sales, and&nbsp;support</p>
-											</div>
-										</div>
-										<div class="views-field views-field-field-responsibility"><span
-												class="views-label views-label-field-responsibility">Skills &
-												Responsibilities:
-											</span>
-											<div class="field-content">
-												<ul>
-													<li>Consulting, training, and services</li>
-													<li>CRM software engineering</li>
-													<li>Software development — My original code to aggregate phone,
-														email, chat, fax, and sales data still in use over 10 years
-														later</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div class="job-article views-row">
-										<div class="views-field views-field-title">
-											<h3 class="field-content">Web Developer</h3>
-										</div>
-										<div class="views-field views-field-field-company"><span
-												class="views-label views-label-field-company visually-hidden">Employer:
-											</span>
-											<h4 class="field-content job-company">Apex Interactive</h4>
-										</div>
-										<div class="views-field views-field-field-dates-of-employment"><span
-												class="views-label views-label-field-dates-of-employment visually-hidden">Employment
-												Dates: </span>
-											<h5 class="field-content">March&nbsp;1997</h5>
-										</div>
-										<div class="views-field views-field-field-employment-end-date">
-											<h5 class="field-content">September 1999</h5>
-										</div>
-										<div class="views-field views-field-body"><span
-												class="views-label views-label-body visually-hidden">Job Description:
-											</span>
-											<div class="field-content">
-												<p>E-commerce,
-													inventory management, and&nbsp;web design for emerging .com
-													companies&nbsp;including development of first-gen shopping carts.
-												</p>
-											</div>
-										</div>
-										<div class="views-field views-field-field-responsibility"><span
-												class="views-label views-label-field-responsibility">Skills &
-												Responsibilities:
-											</span>
-											<div class="field-content">
-												<ul>
-													<li>Web design</li>
-													<li>Content design and management</li>
-													<li>Database programming</li>
-												</ul>
-											</div>
-										</div>
-										<div class="views-field views-field-field-supervisor"><span
-												class="views-label views-label-field-supervisor">Supervisor: </span>
-											<div class="field-content">
-												<ul>
-													<li>Bridget Carriveau</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-				<!-- End Footer First Region -->
-
-				<!-- Start Footer Second Region -->
-				<div class="col-md-6">
-
-
-				</div>
-				<!-- End Footer Second Region -->
-
-				<!-- Start Footer third Region -->
-				<div class="col-md-6">
-				</div>
-				<!-- End Footer Third Region -->
-			</div>
-		</div>
-	</div>
-	<!--End Footer -->
-
-	<!-- Start Footer Menu -->
-	<div class="footer-menu">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6 col-md-6">
-					<div class="region region-footer-menu">
-						<nav role="navigation" aria-labelledby="block-personal-promotion-drupal8-footer-menu"
-							id="block-personal-promotion-drupal8-footer">
-
-							<h2 class="visually-hidden" id="block-personal-promotion-drupal8-footer-menu">Footer menu
-							</h2>
-
-							<ul class="menu">
-								<li class="menu-item">
-									<a href="#top" title="Back to the top!" data-drupal-link-system-path="&lt;front&gt;"
-										class="is-active">Top</a>
-								</li>
-								<li class="menu-item">
-									<a href="#jobs" title="Positions Luke has held or currently holds"
-										data-drupal-link-system-path="&lt;front&gt;" class="is-active">Experience</a>
-								</li>
-							</ul>
-
-						</nav>
-
-					</div>
-
-				</div>
-				<div class="col-sm-6 col-md-6">
-					<div class="social-media">
-						<a href="https://twitter.com/myfavoriteluke" class="twitter" target="_blank"><i
-								class="fa fa-twitter"></i></a>
-						<a href="https://www.linkedin.com/in/lrebarchik" class="linkedin" target="_blank"><i
-								class="fa fa-linkedin"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Footer Menu -->
-
-	<div class="copyright">
-		<div class="container">
-			<div class="row">
-
-				<!-- Copyright -->
-				<div class="col-sm-6 col-md-6">
-
-					<p>Copyright 2024 · All rights reserved</p>
-				</div>
-				<!-- End Copyright -->
-
-				<!-- Credit link -->
-				<div class="col-sm-6 col-md-6">
-					<p class="credit-link">Designed by <a href="http://lukerebarchik.com/" target="_blank">Luke
-							Rebarchik</a></p>
-				</div>
-				<!-- End Credit link -->
-
-			</div>
-		</div>
-	</div>
-
-	<script src="js/ready.min.js"></script>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery.once.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/custom.js"></script>
 </body>
-
 </html>
