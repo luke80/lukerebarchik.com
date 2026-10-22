@@ -1,5 +1,6 @@
 {
   "routes": [
+    { "route": "/", "rewrite": "/index.html" },
     { "route": "/.*", "statusCode": 404 },
     { "route": "/node_modules/*", "statusCode": 404 },
     { "route": "/jspm_packages/*", "statusCode": 404 },
