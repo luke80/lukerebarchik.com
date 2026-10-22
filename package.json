@@ -1,0 +1,18 @@
+{
+  "name": "lukerebarchik.com",
+  "private": true,
+  "description": "Static personal site for lukerebarchik.com",
+  "license": "GPL-3.0",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@html-eslint/eslint-plugin": "^0.67.0",
+    "@html-eslint/parser": "^0.67.0",
+    "eslint": "^10.13.0",
+    "eslint-plugin-html": "^8.2.1",
+    "globals": "^17.13.0"
+  }
+}
