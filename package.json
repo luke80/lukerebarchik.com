@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "swa start . --port 4280",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "fingerprint": "node scripts/fingerprint.mjs"
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "2.1.0",

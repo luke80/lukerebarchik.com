@@ -80,6 +80,9 @@ jobs:
           [ -n "$token" ] || { echo "::error::Could not fetch the Static Web App deployment token"; exit 1; }
           echo "::add-mask::$token"
           echo "token=$token" >> "$GITHUB_OUTPUT"
+      # Version fingerprint (#26): same npm script as local use, stamped with this commit.
+      - name: Stamp version fingerprint
+        run: npm run fingerprint -- --commit "${GITHUB_SHA::7}" --date "$(date -u +%F)"
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -94,6 +97,15 @@ jobs:
           output_location: "/" # Built app content directory - optional
           skip_app_build: true # Plain static site; package.json is only for linting
           ###### End of Repository/Build Configurations ######
+      # Confirm the deployed page is this commit (retries while the deploy propagates).
+      - name: Verify deployed fingerprint
+        env:
+          SITE_URL: ${{ steps.builddeploy.outputs.static_web_app_url }}
+        run: |
+          npm run fingerprint -- --verify "$SITE_URL" --commit "${GITHUB_SHA::7}" --attempts 12
+          if [ "$GITHUB_EVENT_NAME" = push ]; then
+            npm run fingerprint -- --verify https://lukerebarchik.com/ --commit "${GITHUB_SHA::7}" --attempts 12
+          fi
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
