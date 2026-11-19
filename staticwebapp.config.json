@@ -14,6 +14,7 @@
     { "route": "/build/*", "statusCode": 404 },
     { "route": "/out/*", "statusCode": 404 },
     { "route": "/dist/*", "statusCode": 404 },
+    { "route": "/scripts/*", "statusCode": 404 },
     { "route": "/report.*", "statusCode": 404 },
     { "route": "/*.{log,pid,seed,lock,lcov,tsbuildinfo,tgz}", "statusCode": 404 },
     { "route": "/*.{pem,key,pfx,p12,tfstate,backup}", "statusCode": 404 },

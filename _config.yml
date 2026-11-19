@@ -26,6 +26,7 @@ exclude:
   - build/
   - out/
   - dist/
+  - scripts/
   - "report.*"
   - "*.log"
   - "*.pid"
