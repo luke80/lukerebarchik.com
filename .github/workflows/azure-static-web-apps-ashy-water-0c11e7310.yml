@@ -14,18 +14,46 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Lint
+    outputs:
+      docs_only: ${{ steps.changes.outputs.docs_only }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history for the secret scan and the changed-file diff
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm run lint
+      # Always runs, so docs-only changes still pass through the required Lint check.
+      - name: Secret scan
+        run: node .githooks/secure-git.mjs scan-history
+      # Docs-only = every changed file is under docs/ or ends in .md. Those skip lint and deploy.
+      - name: Detect docs-only change
+        id: changes
+        env:
+          # PRs check out a merge commit, so its first parent is the base it was built on.
+          BASE: ${{ github.event_name == 'pull_request' && 'HEAD^1' || github.event.before }}
+        run: |
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            echo "docs_only=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          # --no-renames lists both paths, so moving a site file to *.md isn't docs-only.
+          # If the base is unreachable (e.g. rewritten history), run the full pipeline.
+          files=$(git diff --name-only --no-renames "$BASE" HEAD) || { echo "docs_only=false" >> "$GITHUB_OUTPUT"; exit 0; }
+          echo "$files"
+          if [ -n "$files" ] && ! echo "$files" | grep -qvE '^docs/|\.md$'; then
+            echo "docs_only=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "docs_only=false" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.changes.outputs.docs_only != 'true'
+        run: npm ci
+      - if: steps.changes.outputs.docs_only != 'true'
+        run: npm run lint
 
   build_and_deploy_job:
     needs: lint
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: needs.lint.outputs.docs_only != 'true' && (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed'))
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
