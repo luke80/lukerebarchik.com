@@ -1,0 +1,59 @@
+name: Weekly accessibility scan
+
+# WCAG 2.2 AA scan of production (#16, docs/risks.md). On failure it opens a
+# Bug, or comments on the open one, so a failed scheduled run is never silent.
+on:
+  schedule:
+    - cron: "0 14 * * 1" # Mondays 14:00 UTC
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "URL to scan"
+        default: "https://lukerebarchik.com"
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    name: Scan production
+    permissions:
+      contents: read
+      issues: write # open or update the failure issue
+    env:
+      BASE_URL: ${{ inputs.base_url || 'https://lukerebarchik.com' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Scan WCAG 2.2 AA
+        run: npm run test:a11y
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a11y-results
+          path: test-results/
+          retention-days: 30
+      - name: Open or update the failure issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Weekly accessibility scan failed"
+          existing=$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "\"$title\" in:title" --json number -q '.[0].number')
+          note="The scheduled WCAG 2.2 AA scan of $BASE_URL failed on $(date -u +%F). Results: $RUN_URL"
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" -R "$GITHUB_REPOSITORY" --body "$note"
+          else
+            gh issue create -R "$GITHUB_REPOSITORY" --title "$title" \
+              --label "type:bug,area:site,risk:accessibility" \
+              --body "$note
+
+          Each violation in the run log names the axe rule, its impact, a help link and the affected elements. Fix them as Bugs (docs/risks.md: a WCAG A/AA failure is High or Medium and is fixed before new work in the same area). Close this issue when the scan passes again."
+          fi
