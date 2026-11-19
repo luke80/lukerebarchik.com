@@ -61,6 +61,8 @@ jobs:
     concurrency:
       group: deploy-${{ github.ref }}
       cancel-in-progress: false
+    outputs:
+      site_url: ${{ steps.builddeploy.outputs.static_web_app_url }}
     permissions:
       contents: read
       id-token: write # OIDC sign-in to Azure
@@ -112,6 +114,36 @@ jobs:
           if [ "$GITHUB_EVENT_NAME" = push ]; then
             npm run fingerprint -- --verify https://lukerebarchik.com/ --commit "${GITHUB_SHA::7}" --attempts 12
           fi
+
+  # WCAG 2.2 AA scan (axe-core via Playwright) of what was just deployed: the PR
+  # preview, or production after a merge. Desktop and phone, light and dark.
+  a11y:
+    needs: build_and_deploy_job
+    runs-on: ubuntu-latest
+    name: Accessibility scan
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Scan WCAG 2.2 AA
+        env:
+          BASE_URL: ${{ needs.build_and_deploy_job.outputs.site_url }}
+        run: |
+          [ -n "$BASE_URL" ] || { echo "::error::Deploy job returned no site URL"; exit 1; }
+          echo "Scanning $BASE_URL"
+          npm run test:a11y
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a11y-results
+          path: test-results/
+          retention-days: 14
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

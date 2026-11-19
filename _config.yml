@@ -12,6 +12,7 @@ exclude:
   - package.json
   - package-lock.json
   - eslint.config.mjs
+  - playwright.config.mjs
   - staticwebapp.config.json
   - swa-cli.config.json
   # Build output, logs and caches (gitignored, listed in case one gets committed)
@@ -27,6 +28,10 @@ exclude:
   - out/
   - dist/
   - scripts/
+  - tests/
+  - test-results/
+  - playwright-report/
+  - blob-report/
   - "report.*"
   - "*.log"
   - "*.pid"

@@ -61,7 +61,7 @@ export async function verify(url, { commit, attempts = 1, delayMs = 5000 } = {})
       // Hash what was actually served, not just what its stamp claims.
       const served = contentHash(html);
       if (!res.ok) problem = `${url} returned HTTP ${res.status}.`;
-      else if (!fp || fp.site !== SITE) problem = `${url} has no ${SITE} fingerprint, so it isn't this site.`;
+      else if (!fp || fp.site !== SITE) problem = `${url} has no ${SITE} fingerprint: it is another app, or a copy of the site that was never stamped (npm run fingerprint).`;
       else if (served !== local) problem = `${url} serves a different version of ${SITE} (its content hash is ${served}, this checkout's is ${local}; its fingerprint says "${fp.text}").`;
       else if (fp.hash !== served) problem = `${url} has a stale fingerprint ("${fp.text}") for its content (${served}). Run npm run fingerprint.`;
       else if (commit && !commit.startsWith(fp.commit) && !fp.commit.startsWith(commit)) problem = `${url} serves commit ${fp.commit}, expected ${commit}.`;
