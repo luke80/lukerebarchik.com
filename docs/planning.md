@@ -2,6 +2,8 @@
 
 Work for lukerebarchik.com is tracked in this repo's GitHub Issues ([D7](decisions.md#d7-plan-and-track-work-on-github-not-azure-devops-2026-11-19)). This page is the reference for how. Work items link here rather than repeating it.
 
+> **Status (2026-11-19):** the labels exist (#11). The issue forms (#12) and Project board (#13) are being set up in the "Planning foundation" milestone; until they ship, those sections describe the target.
+
 ## Hierarchy
 
 | Type | Label | Is | Ships in |

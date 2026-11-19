@@ -19,9 +19,9 @@ Each risk has a `risk:*` label. Put the label on any work item that could cause 
 - **Mitigation in place:**
   - Secret scanning in three places: local hooks, GitHub push protection and CI.
   - `main` is protected and `Lint` is required.
-  - CI fetches the deploy token per run via OIDC, using a least-privilege identity ([D5](decisions.md)).
+  - CI fetches the deploy token per run via OIDC, using a least-privilege identity ([D5](decisions.md#d5-fetch-the-deploy-token-at-runtime-via-oidc-2026-11-19-pr-7)).
   - 404 routes on Azure plus Jekyll excludes on the Pages mirror.
-  - Dev dependencies are exact-pinned where added.
+  - The SWA CLI is exact-pinned; the other dev dependencies are locked by `package-lock.json`.
 - **Scheduled checks (to build):**
   - `npm audit` on a schedule.
   - Dependabot security updates.
@@ -78,8 +78,8 @@ Each risk has a `risk:*` label. Put the label on any work item that could cause 
 - **What could go wrong:** the site looks broken, dated, slow or careless. It's Luke's professional face (A2), so polish failures cost credibility even when nothing is technically wrong.
 - **Mitigation in place:**
   - Design-system conventions (`CLAUDE.md`).
-  - Image rules: web formats, responsive sizes, alt text.
   - Preview review before merge.
+- **Planned:** image rules in `CLAUDE.md` once the site uses images (web formats, responsive sizes, alt text, originals kept out of the deployed folder).
 - **Scheduled checks (to build):** periodic Lighthouse performance and SEO checks, and a review at phone and desktop widths.
 - **If it happens:** treat it as a Bug. Fix visible breakage before new work.
 

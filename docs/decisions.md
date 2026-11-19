@@ -7,7 +7,7 @@ Newest first. Each entry says what was decided, why, and what was rejected. Link
 - **Decision:** use GitHub Issues, sub-issues, labels, milestones, issue forms and a GitHub Project for this project's planning, alongside the code.
 - **Why:** the code, CI, deploys and the Pages mirror already live on GitHub. One place for code and work items is simpler for a solo personal site.
 - **Exception:** Luke's default is Azure DevOps Boards and an ADO Git repo. This project is a deliberate exception.
-- **Rejected:** a new ADO project (separate tool to keep in sync), an area in "Ligature Consulting" (mixes personal and company work), moving the repo to ADO (would mean rebuilding CI and dropping the Pages mirror).
+- **Rejected:** a new ADO project (separate tool to keep in sync), an area in an existing company ADO project (mixes personal and company work), moving the repo to ADO (would mean rebuilding CI and dropping the Pages mirror).
 
 ## D6. Keep the GitHub Pages mirror, but exclude non-site files (2026-11-19, PR #8)
 
