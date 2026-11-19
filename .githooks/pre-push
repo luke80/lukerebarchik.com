@@ -1,0 +1,4 @@
+#!/bin/sh
+# Security checks from /secure-git, first so nothing else handles a secret.
+command -v node >/dev/null 2>&1 || { echo "secure-git needs Node.js to check this." >&2; exit 1; }
+node .githooks/secure-git.mjs pre-push "$1" || exit 1
