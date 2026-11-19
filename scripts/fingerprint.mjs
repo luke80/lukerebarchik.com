@@ -55,7 +55,7 @@ export async function verify(url, { commit, attempts = 1, delayMs = 5000 } = {})
   let problem = "";
   for (let i = 1; i <= attempts; i++) {
     try {
-      const res = await fetch(url, { headers: { "cache-control": "no-cache" } });
+      const res = await fetch(url, { headers: { "cache-control": "no-cache" }, signal: AbortSignal.timeout(15000) });
       const html = await res.text();
       const fp = readFingerprint(html);
       // Hash what was actually served, not just what its stamp claims.
@@ -74,13 +74,21 @@ export async function verify(url, { commit, attempts = 1, delayMs = 5000 } = {})
   return problem;
 }
 
+/** Value after --name; "" if the flag is present without a value; undefined if absent. */
 function arg(name) {
   const i = process.argv.indexOf(`--${name}`);
-  return i > 0 ? process.argv[i + 1] : undefined;
+  if (i < 0) return undefined;
+  const value = process.argv[i + 1];
+  return value === undefined || value.startsWith("--") ? "" : value;
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   let url = arg("verify");
+  if (url === "") {
+    // e.g. an empty deploy output: never fall through to stamping and report success.
+    console.error("--verify needs a URL.");
+    process.exit(1);
+  }
   if (url && !/^https?:\/\//.test(url)) url = `https://${url}`;
   if (url) {
     const problem = await verify(url, { commit: arg("commit"), attempts: Number(arg("attempts") || 1) });

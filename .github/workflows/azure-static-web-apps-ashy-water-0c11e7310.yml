@@ -56,6 +56,11 @@ jobs:
     if: needs.lint.outputs.docs_only != 'true' && (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed'))
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    # One deploy per ref at a time, so the post-deploy fingerprint check on main
+    # can't see a newer deploy that started after this one.
+    concurrency:
+      group: deploy-${{ github.ref }}
+      cancel-in-progress: false
     permissions:
       contents: read
       id-token: write # OIDC sign-in to Azure
@@ -102,6 +107,7 @@ jobs:
         env:
           SITE_URL: ${{ steps.builddeploy.outputs.static_web_app_url }}
         run: |
+          [ -n "$SITE_URL" ] || { echo "::error::Deploy step returned no static_web_app_url"; exit 1; }
           npm run fingerprint -- --verify "$SITE_URL" --commit "${GITHUB_SHA::7}" --attempts 12
           if [ "$GITHUB_EVENT_NAME" = push ]; then
             npm run fingerprint -- --verify https://lukerebarchik.com/ --commit "${GITHUB_SHA::7}" --attempts 12
