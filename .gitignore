@@ -140,3 +140,6 @@ dist
 *.p12
 *.tfstate
 *.tfstate.backup
+
+# Azure SWA CLI config (written by swa init/deploy, not used by npm run dev)
+swa-cli.config.json
