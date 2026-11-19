@@ -1,0 +1,42 @@
+# GitHub Pages (legacy Jekyll build from main) serves a mirror of the site at
+# https://luke80.github.io/lukerebarchik.com/. Pages ignores staticwebapp.config.json,
+# so this exclude list mirrors its 404 routes. When you add a route there, add it here.
+# Jekyll already skips dot-paths (.github/, .githooks/, .claude/, .gitignore) and
+# files starting with _ (including this one), and excludes node_modules/ by default.
+exclude:
+  # Project docs and all Markdown (CLAUDE.md, README.md)
+  - docs/
+  - "*.md"
+  # Tooling and config
+  - package.json
+  - package-lock.json
+  - eslint.config.mjs
+  - staticwebapp.config.json
+  - swa-cli.config.json
+  # Build output, logs and caches (gitignored, listed in case one gets committed)
+  - node_modules/
+  - jspm_packages/
+  - bower_components/
+  - web_modules/
+  - logs/
+  - pids/
+  - lib-cov/
+  - coverage/
+  - build/
+  - out/
+  - dist/
+  - "report.*"
+  - "*.log"
+  - "*.pid"
+  - "*.seed"
+  - "*.lock"
+  - "*.lcov"
+  - "*.tsbuildinfo"
+  - "*.tgz"
+  # Keys, certificates and state files
+  - "*.pem"
+  - "*.key"
+  - "*.pfx"
+  - "*.p12"
+  - "*.tfstate"
+  - "*.backup"
