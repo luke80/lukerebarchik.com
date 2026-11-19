@@ -4,10 +4,12 @@
   "description": "Static personal site for lukerebarchik.com",
   "license": "GPL-3.0",
   "scripts": {
+    "dev": "swa start . --port 4280",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
+    "@azure/static-web-apps-cli": "2.1.0",
     "@eslint/js": "^10.0.1",
     "@html-eslint/eslint-plugin": "^0.67.0",
     "@html-eslint/parser": "^0.67.0",
