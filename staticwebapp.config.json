@@ -15,6 +15,7 @@
     { "route": "/dist/*", "statusCode": 404 },
     { "route": "/report.*", "statusCode": 404 },
     { "route": "/*.{log,pid,seed,lock,lcov,tsbuildinfo,tgz}", "statusCode": 404 },
+    { "route": "/*.{pem,key,pfx,p12,tfstate,backup}", "statusCode": 404 },
     { "route": "/package.json", "statusCode": 404 },
     { "route": "/package-lock.json", "statusCode": 404 },
     { "route": "/eslint.config.mjs", "statusCode": 404 },
