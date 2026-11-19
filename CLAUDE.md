@@ -37,3 +37,7 @@ The page is styled as a "systems drawing sheet" (see the comment at the top of t
 ## Content
 
 The page is effectively a résumé: hero, three recent-project panels, services, experience timeline, engagement modes, recommendations, toolkit, and contact (LinkedIn only, no email or form). Factual content (dates, titles, employers, figures like "$9.3M+" or "44M+") must stay consistent across the hero, recent-work panels, services prooflines, the experience timeline, and the `<meta name="description">`. When editing one, check the others.
+
+## Planning
+
+Work is planned and tracked in this repo's GitHub Issues, not Azure DevOps. `docs/` holds the purpose, assumptions, decisions, planning conventions (hierarchy, labels, milestones, required fields, acceptance criteria) and the risk register; start at `docs/README.md`. Update the relevant doc in the same PR as the change that makes it out of date.
