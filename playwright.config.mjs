@@ -1,5 +1,7 @@
 // Browser tests for lukerebarchik.com (docs/planning.md#acceptance-criteria).
-// Target: BASE_URL (a PR preview or production in CI). Without it, starts `npm run dev`.
+// Target: BASE_URL (a PR preview or production in CI). Without it, reuses whatever is on
+// port 4280 or starts `npm run dev`. Either way, tests/global-setup.mjs first checks that the
+// target serves this checkout (by its version fingerprint) and stops if it doesn't.
 //   npm run test:a11y                                   local dev server
 //   BASE_URL=https://lukerebarchik.com npm run test:a11y   any deployed copy
 import { defineConfig, devices } from "@playwright/test";
@@ -12,6 +14,7 @@ export default defineConfig({
   fullyParallel: true,
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [["github"], ["list"]] : "list",
+  globalSetup: "./tests/global-setup.mjs",
   use: { baseURL },
   // Every check runs at desktop and phone widths, in light and dark mode.
   projects: [

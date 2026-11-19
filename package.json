@@ -8,7 +8,10 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "fingerprint": "node scripts/fingerprint.mjs",
-    "test:a11y": "playwright test"
+    "test:a11y": "npm run fingerprint && playwright test"
+  },
+  "overrides": {
+    "playwright-core": "1.64.1"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
