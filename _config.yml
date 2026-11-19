@@ -2,10 +2,11 @@
 # https://luke80.github.io/lukerebarchik.com/. Pages ignores staticwebapp.config.json,
 # so this exclude list mirrors its 404 routes. When you add a route there, add it here.
 # Jekyll already skips dot-paths (.github/, .githooks/, .claude/, .gitignore) and
-# files starting with _ (including this one), and excludes node_modules/ by default.
+# files starting with _ (including this one). This list replaces Jekyll 3's default
+# excludes rather than adding to them, so node_modules/ must stay listed below.
 exclude:
   # Project docs and all Markdown (CLAUDE.md, README.md)
-  - docs/
+  - "docs*"
   - "*.md"
   # Tooling and config
   - package.json
