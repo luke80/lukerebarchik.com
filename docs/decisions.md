@@ -2,6 +2,12 @@
 
 Newest first. Each entry says what was decided, why, and what was rejected. Link the PR or issue where it happened.
 
+## D11. Weekly npm audit and Dependabot security updates (2026-11-20, #15)
+
+- **Decision:** Dependabot alerts and security updates are on (repo settings). `.github/workflows/npm-audit.yml` runs `npm audit` against `package-lock.json` every Monday and keeps one tracking issue, "npm audit: high or critical vulnerabilities", up to date: it rewrites the description each run, comments only when the set of advisories changes, and closes the issue when none are left. The run itself succeeds when findings exist; the issue is the signal.
+- **Why:** every npm package here is a dev dependency, so findings are real but rarely urgent. On 2026-11-20 the six high advisories (five in adm-zip, one in tmp) all come from `@azure/static-web-apps-cli` 2.1.0, and npm's only suggested fix is a downgrade to 1.1.3, so they will stay open until Microsoft releases a fix. A weekly red run or a weekly comment would be noise for that whole time.
+- **Rejected:** Dependabot version updates (`dependabot.yml`), which would add routine bump PRs outside #15's scope; failing on moderate findings; installing packages in the audit job (it only needs the lockfile).
+
 ## D10. Privacy: a separate notice page, 2-month cookie, and Global Privacy Control (2026-11-20, #20, #34)
 
 - **Decision:** the privacy notice is its own page (`/privacy.html`), written formally in the third person, linked from both footers. GA's event and user data retention are 2 months, the `_ga` cookies expire 2 months after the latest visit (`cookie_expires`), Google signals is off, and GA doesn't load at all when the browser sends Global Privacy Control.

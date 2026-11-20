@@ -1,0 +1,61 @@
+name: Weekly npm audit
+
+# Checks package-lock.json against the npm advisory database (#15, docs/risks.md).
+# High or critical findings open (or rewrite) one tracking issue; it gets a comment only
+# when the set of advisories changes, and is closed when none are left. Registry or network
+# errors fail the run without touching the issue. Dependabot security updates (repo setting)
+# propose the fix PRs; this is the weekly paper trail.
+on:
+  schedule:
+    - cron: "0 14 * * 1" # Mondays 14:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A manual run that overlaps the Monday run waits, so they can't both create the issue.
+concurrency:
+  group: npm-audit
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    name: Audit dependencies
+    permissions:
+      contents: read
+      issues: write # open, update or close the tracking issue
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Reads only package-lock.json; nothing is installed or run from the packages.
+      - name: npm audit
+        run: |
+          npm audit --json > audit.json || true
+          node scripts/audit-report.mjs audit.json body.md > ids.txt
+      - name: Open, update or close the tracking issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="npm audit: high or critical vulnerabilities"
+          ids=$(cat ids.txt)
+          existing=$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "\"$title\" in:title" --json number,title -q "map(select(.title == \"$title\"))[0].number // empty")
+          printf '\nRun: %s\n' "$RUN_URL" >> body.md
+          cat body.md >> "$GITHUB_STEP_SUMMARY"
+          if [ -z "$ids" ]; then
+            if [ -n "$existing" ]; then
+              gh issue close "$existing" -R "$GITHUB_REPOSITORY" --comment "No high or critical advisories left on $(date -u +%F). $RUN_URL"
+            fi
+            exit 0
+          fi
+          if [ -z "$existing" ]; then
+            gh issue create -R "$GITHUB_REPOSITORY" --title "$title" --label "type:bug,area:platform,risk:security" --body-file body.md
+            exit 0
+          fi
+          previous=$(gh issue view "$existing" -R "$GITHUB_REPOSITORY" --json body -q .body | tr -d '\r' | sed -n 's/^<!-- advisories: \(.*\) -->$/\1/p')
+          gh issue edit "$existing" -R "$GITHUB_REPOSITORY" --body-file body.md
+          if [ "$previous" != "$ids" ]; then
+            gh issue comment "$existing" -R "$GITHUB_REPOSITORY" --body "The list of high or critical advisories changed on $(date -u +%F); the description now shows the current findings. $RUN_URL"
+          fi

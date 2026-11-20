@@ -17,7 +17,7 @@ Luke Rebarchik's personal/professional site, live at https://lukerebarchik.com (
 
 ## Before pushing or opening a PR
 
-`main` is protected on GitHub: a PR is required, the `Lint` check must pass, and force-pushes and deletion are blocked. GitHub secret scanning and push protection are on. Locally, `.githooks/` (from `/secure-git`) refuses commits or pushes to `main` and anything that looks like a secret. Each new clone needs `/secure-git` once (or `git config core.hooksPath .githooks`) to wire it up. Work on a branch.
+`main` is protected on GitHub: a PR is required, the `Lint` check must pass, and force-pushes and deletion are blocked. GitHub secret scanning and push protection are on, and so are Dependabot alerts and security updates (no `dependabot.yml`, so no routine version-update PRs). `.github/workflows/npm-audit.yml` runs `npm audit` every Monday (and on demand) and keeps one "npm audit: high or critical vulnerabilities" issue current; `scripts/audit-report.mjs` writes its description. Run it by hand with `gh workflow run npm-audit.yml`. Locally, `.githooks/` (from `/secure-git`) refuses commits or pushes to `main` and anything that looks like a secret. Each new clone needs `/secure-git` once (or `git config core.hooksPath .githooks`) to wire it up. Work on a branch.
 
 Run `npm run lint`, then invoke the `code-reviewer` subagent (`.claude/agents/code-reviewer.md`) on the pending changes. Resolve its blocking findings before `git push` or `gh pr create`.
 
