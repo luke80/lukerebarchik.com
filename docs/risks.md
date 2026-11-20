@@ -22,9 +22,9 @@ Each risk has a `risk:*` label. Put the label on any work item that could cause 
   - CI fetches the deploy token per run via OIDC, using a least-privilege identity ([D5](decisions.md#d5-fetch-the-deploy-token-at-runtime-via-oidc-2026-11-19-pr-7)).
   - 404 routes on Azure plus Jekyll excludes on the Pages mirror.
   - The SWA CLI is exact-pinned; the other dev dependencies are locked by `package-lock.json`.
+  - Dependabot alerts and security updates, which propose fix PRs for vulnerable dependencies (#15).
+  - `.github/workflows/npm-audit.yml` every Monday: high or critical `npm audit` findings open or update the "npm audit: high or critical vulnerabilities" issue (`risk:security`), which is closed automatically when they're fixed ([D11](decisions.md#d11-weekly-npm-audit-and-dependabot-security-updates-2026-11-20-15)).
 - **Scheduled checks (to build):**
-  - `npm audit` on a schedule.
-  - Dependabot security updates.
   - A periodic review against the OWASP Top 10, including third-party scripts (Google Analytics) and security headers.
 - **If it happens:**
   - Rotate any exposed credential first (`az staticwebapp secrets reset-api-key …`, see `CLAUDE.md`).
