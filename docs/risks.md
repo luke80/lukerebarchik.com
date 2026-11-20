@@ -25,7 +25,7 @@ Each risk has a `risk:*` label. Put the label on any work item that could cause 
 - **Scheduled checks (to build):**
   - `npm audit` on a schedule.
   - Dependabot security updates.
-  - A periodic review against the OWASP Top 10, including third-party scripts (Google Analytics, Google Fonts) and security headers.
+  - A periodic review against the OWASP Top 10, including third-party scripts (Google Analytics) and security headers.
 - **If it happens:**
   - Rotate any exposed credential first (`az staticwebapp secrets reset-api-key …`, see `CLAUDE.md`).
   - Then remove it from the code, and decide with Luke before rewriting history.
@@ -49,6 +49,7 @@ Each risk has a `risk:*` label. Put the label on any work item that could cause 
 - **Mitigation in place:**
   - No email, phone or form on the page (A3).
   - The repo is treated as public, so no personal data is kept in it (A10).
+  - Fonts are self-hosted, so Google Analytics is the only third party the page contacts (#32).
 - **Planned:**
   - A privacy notice saying what Google Analytics collects and for how long, with GA retention set to the minimum (A7).
   - The contact form (A4) will need its own data-handling and retention plan.
