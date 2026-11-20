@@ -37,7 +37,7 @@ Each risk has a `risk:*` label. Put the label on any work item that could cause 
 - **Standards:** [WCAG 2.2 AA](https://www.w3.org/TR/WCAG22/) (A6). Guidance from [W3C WAI](https://www.w3.org/WAI/), [WebAIM](https://webaim.org/) and [ADA.gov](https://www.ada.gov/resources/web-guidance/).
 - **Mitigation in place:**
   - ESLint runs `@html-eslint` on the markup.
-  - The single light theme is built from color tokens (`--p-*`), with 7:1 body and 4.5:1 label contrast.
+  - Light and dark themes are built from color tokens.
   - Automated WCAG 2.2 AA scan (axe-core via Playwright, `npm run test:a11y`, #16): the `Accessibility scan` CI job on every PR preview and on production after each deploy, plus `.github/workflows/a11y-weekly.yml` every Monday against https://lukerebarchik.com, which opens or updates a `risk:accessibility` Bug when it fails. Automated rules cover only part of WCAG.
 - **Scheduled checks (to build):**
   - A periodic manual check: keyboard, screen reader, contrast, 200% zoom, reduced motion.

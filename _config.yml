@@ -28,7 +28,6 @@ exclude:
   - out/
   - dist/
   - scripts/
-  - source-images/
   - shots/
   - tests/
   - test-results/

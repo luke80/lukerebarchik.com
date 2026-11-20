@@ -144,11 +144,11 @@ dist
 # Azure SWA CLI config (written by swa init/deploy, not used by npm run dev)
 swa-cli.config.json
 
+# design-taste-frontend skill working files (they hold local paths)
+.taste-skill/
+shots/
+
 # Playwright test output
 test-results/
 playwright-report/
 blob-report/
-
-# design-taste-frontend skill working files (they hold local paths); the before/after measurements are in docs/redesign-2026-11.md
-.taste-skill/
-shots/

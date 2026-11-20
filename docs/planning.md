@@ -65,10 +65,10 @@ When an item gets complicated or needs more information, re-read its assumptions
 
 Acceptance criteria name, at minimum, the **integration tests that must pass**. For this site, that means checks against a real deployment, usually the PR's Azure preview environment:
 
-- **Browser checks:** the page renders and works at desktop and phone widths. Automated where the tooling exists.
+- **Browser checks:** the page renders and works at desktop and phone widths, in light and dark mode. Automated where the tooling exists.
 - **Routing checks:** `curl` status codes for `/`, `/index.html` and any blocked paths, on the preview and after deploy. On the GitHub Pages mirror too, if `_config.yml` changed.
 - **Accessibility:** no WCAG 2.2 AA violations from the automated scan, plus any manual checks the change needs (keyboard, screen reader, contrast).
-- **Content:** facts stay consistent across hero, recent work, the statement, services, the roles list and meta description (A11).
+- **Content:** facts stay consistent across hero, recent work, services, timeline and meta description (A11).
 
 Write criteria so someone else could run them and get a clear pass or fail.
 

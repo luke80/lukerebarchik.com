@@ -2,6 +2,13 @@
 
 Newest first. Each entry says what was decided, why, and what was rejected. Link the PR or issue where it happened.
 
+## D8. Redesign: option D ("Signal") (2026-11-20, PR #29, part of #21)
+
+- **Decision:** the redesign ships as option D, "Signal": one self-contained `index.html` (inline CSS, Archivo and IBM Plex), white and charcoal with red as the single accent, light and dark themes with a saved toggle, and no photos.
+- **Why:** Luke compared the options from the redesign session and chose D.
+- **Rejected:** the design-taste-frontend kit version (vendored `assets/` kit, Source Serif 4 and Libre Franklin, light only, portrait photo with a `sharp` image pipeline). It's in PR #29's first commit for reference.
+- **Deferred:** a portrait photo and the image pipeline. If D gets a photo later, that's a new issue.
+
 ## D7. Plan and track work on GitHub, not Azure DevOps (2026-11-19)
 
 - **Decision:** use GitHub Issues, sub-issues, labels, milestones, issue forms and a GitHub Project for this project's planning, alongside the code.

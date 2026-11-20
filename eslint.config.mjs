@@ -4,7 +4,7 @@ import htmlScripts from "eslint-plugin-html";
 import globals from "globals";
 
 export default [
-  { ignores: ["node_modules/**", "assets/**", ".taste-skill/**"] },
+  { ignores: ["node_modules/**", ".taste-skill/**"] },
 
   // Markup: structure, accessibility and duplicate checks.
   {

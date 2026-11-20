@@ -16,10 +16,10 @@ You review changes to lukerebarchik.com, a single-file static site (`index.html`
 ## What to check
 
 - **Broken markup or links:** unclosed or misnested tags, nav `href="#…"` anchors that no longer match a section `id`, external links with `target="_blank"` missing `rel="noopener"`, references to files that don't exist.
-- **Theming:** any color added or changed must use the `--p-*` tokens on `:root` (or the kit tokens derived from them). There is no dark mode. Flag hard-coded colors.
+- **Theming:** any color added or changed must use the `:root` tokens, and token changes must be made in all three places (light `:root`, the `prefers-color-scheme: dark` block guarded by `:root:not([data-theme="light"])`, and `:root[data-theme="dark"]`). Flag hard-coded colors.
 - **Responsive layout:** new grids or multi-column layouts need a media query that collapses them at phone width. Look for anything that would cause horizontal scroll at about 360px.
-- **Accessibility:** images need `alt`, interactive elements need to be focusable with visible focus, heading levels shouldn't skip, and text/background pairs must keep 7:1 contrast for body text and 4.5:1 for labels.
-- **Content consistency:** dates, titles, employers, and figures (e.g. "$9.3M+", "44M+") must agree across the hero, recent-work cards, the statement, the services, the roles list, and `<meta name="description">`. Flag typos and copy that contradicts other sections.
+- **Accessibility:** images need `alt`, interactive elements need to be focusable with visible focus, heading levels shouldn't skip, and text/background pairs must keep reasonable contrast in both themes.
+- **Content consistency:** dates, titles, employers, and figures (e.g. "$9.3M+", "44M+") must agree across the hero, recent-work panels, service prooflines, the experience timeline, and `<meta name="description">`. Flag typos and copy that contradicts other sections.
 - **Deployment safety:** changes to `.github/workflows/` must keep `skip_app_build: true` and the `lint` job gating deploy. New tooling/build-only files or `.gitignore` entries need a matching 404 route in `staticwebapp.config.json`. Flag any secrets, tokens, or private contact details added to the repo.
 - **Style match:** CSS stays in the compact one-rule-per-line style, with each component's media query right after its rules.
 
