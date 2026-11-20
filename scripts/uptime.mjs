@@ -6,8 +6,9 @@
 // For each site: the pages return 200 with HTML that links to the expected LinkedIn profile, a
 // sample of the blocked tooling paths return 404, and every link and asset on the pages works
 // (#anchors exist on the page they point to, including links between pages; the site's own URLs
-// return 200; other sites answer below 400). LinkedIn answers automated requests with 999, so its
-// link is checked against the expected profile URL instead.
+// return 200; other sites answer below 400). LinkedIn answers automated requests with 999 (or 429
+// when it rate-limits GitHub's shared runners), so its link is checked against the expected
+// profile URL instead.
 // Exits 0 if everything passed, 1 if any check failed, 2 on a usage error, 3 if the script itself
 // broke (so a bug here is never reported as a site outage). On 0 and 1 the only line on stdout is
 // the sorted list of failure keys, so the workflow can tell whether the failures changed.
@@ -114,8 +115,8 @@ async function main() {
     }
     if (idsByPage.has(url)) continue; // one of the pages, already checked above
     const r = await get(url);
-    const ok = isLinkedIn ? r.status === 200 || r.status === 999 : r.status > 0 && r.status < 400;
-    record(`link ${url}`, ok, `${url} works${isLinkedIn ? " (LinkedIn: 999 accepted)" : ""}`, `${show(r)}; linked from ${where}`);
+    const ok = isLinkedIn ? [200, 429, 999].includes(r.status) : r.status > 0 && r.status < 400;
+    record(`link ${url}`, ok, `${url} works${isLinkedIn ? " (LinkedIn: 999 and 429 accepted)" : ""}`, `${show(r)}; linked from ${where}`);
   }
 
   // Deduplicate (an anchor linked from several pages is one check).
