@@ -24,6 +24,7 @@ Each risk has a `risk:*` label. Put the label on any work item that could cause 
   - The SWA CLI is exact-pinned; the other dev dependencies are locked by `package-lock.json`.
   - Dependabot alerts and security updates, which propose fix PRs for vulnerable dependencies (#15).
   - `.github/workflows/npm-audit.yml` every Monday: high or critical `npm audit` findings open or update the "npm audit: high or critical vulnerabilities" issue (`risk:security`), which is closed automatically when they're fixed ([D11](decisions.md#d11-weekly-npm-audit-and-dependabot-security-updates-2026-11-20-15)).
+  - Accepted for now: the SWA CLI's high `adm-zip` and `tmp` advisories (dev-only, no fixed SWA CLI release yet; rated Low). Tracked in #40 until upstream fixes them ([D12](decisions.md#d12-accept-the-swa-clis-dependency-advisories-until-upstream-fixes-them-2026-11-20-40)).
 - **Scheduled checks (to build):**
   - A periodic review against the OWASP Top 10, including third-party scripts (Google Analytics) and security headers.
 - **If it happens:**

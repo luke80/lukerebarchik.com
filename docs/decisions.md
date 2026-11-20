@@ -2,6 +2,13 @@
 
 Newest first. Each entry says what was decided, why, and what was rejected. Link the PR or issue where it happened.
 
+## D12. Accept the SWA CLI's dependency advisories until upstream fixes them (2026-11-20, #40)
+
+- **Decision:** no code change for the high `npm audit` advisories in `adm-zip` and `tmp`, or the moderate and low ones in the same chain. All of them come from `@azure/static-web-apps-cli` 2.1.0. Keep the CLI exact-pinned and update it when a release clears them. #40 tracks this, and #38 (the weekly audit issue) stays open until then.
+- **Why:** the CLI is dev-only. It runs the local preview and the tests, never ships to the site, and isn't used by the deploy ([D3](#d3-local-preview-with-the-pinned-swa-cli-2026-11-19-pr-5)). On 2026-11-20, 2.1.0 is the latest release and requires `adm-zip` `^0.5` (the fix is 0.6.1). The `tmp` fix (0.2.6) is blocked even further upstream, because the newest `devcert` (1.2.3) still requires `tmp` `^0.0.33`. In 2.1.0's shipped code, `adm-zip` is used only to unpack the optional Functions Core Tools and Data API Builder downloads (`dist/core/func-core-tools.js`, `dist/core/dataApiBuilder/dab.js`), which our usage doesn't trigger, and nothing imports `devcert` or `tmp` at all (`--ssl` uses `pem`). That comes from searching `dist/`, not a full trace of the CLI's code.
+- **Rejected:** npm `overrides` forcing `adm-zip` 0.6.1 and `tmp` 0.2.6 or later, because the tests don't exercise the code that uses them, so a passing run wouldn't prove the CLI still works (and `tmp` 0.0.x to 0.2.x is a breaking jump). Replacing the SWA CLI with a plain static server, because that loses local `staticwebapp.config.json` emulation (D3).
+- **Revisit when:** a new SWA CLI release appears (Dependabot or the weekly audit will show it), an advisory turns out to be reachable from untrusted input, or the CLI becomes part of the deploy.
+
 ## D11. Weekly npm audit and Dependabot security updates (2026-11-20, #15)
 
 - **Decision:** Dependabot alerts and security updates are on (repo settings). `.github/workflows/npm-audit.yml` runs `npm audit` against `package-lock.json` every Monday and keeps one tracking issue, "npm audit: high or critical vulnerabilities", up to date: it rewrites the description each run, comments only when the set of advisories changes, and closes the issue when none are left. The run itself succeeds when findings exist; the issue is the signal.
