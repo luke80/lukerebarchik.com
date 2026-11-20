@@ -2,6 +2,13 @@
 
 Newest first. Each entry says what was decided, why, and what was rejected. Link the PR or issue where it happened.
 
+## D13. Daily uptime and link check (2026-11-20, #17)
+
+- **Decision:** `.github/workflows/uptime.yml` runs `scripts/uptime.mjs` daily and on demand against https://lukerebarchik.com and the GitHub Pages mirror. It checks that `/`, `/index.html` and `/privacy.html` return 200, that a sample of blocked tooling paths return 404, that in-page `#anchors` exist, and that every link and asset on the pages (fonts, the other page, external links) works. A failure marks the run failed and keeps one "Uptime or link check failed" issue current, the same way as the npm audit (D11): comment only when the set of failures changes, close on the next passing run.
+- **LinkedIn:** it answers automated requests with status 999, so the profile link can't be verified. The check accepts 999 from linkedin.com and fails if either page's LinkedIn link differs from the expected profile URL (in `scripts/uptime.mjs`). That catches a typo or accidental edit, not a renamed or deleted profile.
+- **Why:** the site is a résumé, and the homepage has 404'd in production before (see `risk:availability`). Daily is often enough to notice within a day and costs about a minute of Actions time.
+- **Rejected:** a paid uptime service or alerting outside GitHub (out of scope in #17); hourly runs (noisier during an outage for little gain on a résumé site); a third-party link-checker action (Node built-ins are enough, so no new dependency to keep patched).
+
 ## D12. Accept the SWA CLI's dependency advisories until upstream fixes them (2026-11-20, #40)
 
 - **Decision:** no code change for the high `npm audit` advisories in `adm-zip` and `tmp`, or the moderate and low ones in the same chain. All of them come from `@azure/static-web-apps-cli` 2.1.0. Keep the CLI exact-pinned and update it when a release clears them. #40 tracks this, and #38 (the weekly audit issue) stays open until then.

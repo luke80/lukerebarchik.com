@@ -65,7 +65,7 @@ Each risk has a `risk:*` label. Put the label on any work item that could cause 
   - Every PR gets an Azure preview environment.
   - CLAUDE.md requires curling `/`, `/index.html` and the blocked paths on the preview before merging route changes, and on production after deploy.
   - The Pages mirror is checked after `_config.yml` changes.
-- **Scheduled checks (to build):** an uptime and link check against production.
+  - `.github/workflows/uptime.yml` every day (#17): both sites' pages return 200, a sample of blocked paths return 404, and every link and asset on the pages works. A failure opens or updates the "Uptime or link check failed" issue (`risk:availability`), which is closed automatically by the next passing run ([D13](decisions.md#d13-daily-uptime-and-link-check-2026-11-20-17)).
 - **If it happens:** revert the merge through a PR, then fix forward on a branch.
 
 ### `risk:accuracy`

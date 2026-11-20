@@ -1,0 +1,76 @@
+name: Daily uptime and link check
+
+# Checks lukerebarchik.com and the GitHub Pages mirror (#17, docs/risks.md): the pages return 200,
+# blocked tooling paths return 404, and every link and asset on the pages works (scripts/uptime.mjs).
+# A failure marks the run failed and opens (or rewrites) one tracking issue, which gets a comment only
+# when the set of failures changes and is closed automatically by the next passing run.
+on:
+  schedule:
+    - cron: "17 13 * * *" # daily 13:17 UTC (off the hour, when GitHub's scheduler is busiest)
+  workflow_dispatch:
+    inputs:
+      expect_ok:
+        description: "Extra path that must return 200 (e.g. /no-such-page, to test that a failure alerts)"
+        default: ""
+
+permissions:
+  contents: read
+
+# A manual run that overlaps the daily run waits, so they can't both create the issue.
+concurrency:
+  group: uptime
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    name: Check both sites
+    timeout-minutes: 15 # each URL waits at most 20 s, twice; a hang shouldn't hold a runner for hours
+    permissions:
+      contents: read
+      issues: write # open, update or close the tracking issue
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # No npm install: the script uses only Node built-ins.
+      - name: Check pages, blocked paths and links
+        id: check
+        env:
+          EXPECT_OK: ${{ inputs.expect_ok }}
+        run: |
+          set +e
+          node scripts/uptime.mjs --body body.md ${EXPECT_OK:+--expect-ok "$EXPECT_OK"} > keys.txt
+          code=$?
+          set -e
+          # 2 is a usage error and 3 a bug in the script; neither is a site problem, so the issue is left alone.
+          # A 1 without a failure list is also treated as a script problem.
+          if [ "$code" -gt 1 ] || { [ "$code" -eq 1 ] && [ ! -s keys.txt ]; }; then exit "$code"; fi
+          echo "failed=$([ "$code" -eq 1 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+      - name: Open, update or close the tracking issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FAILED: ${{ steps.check.outputs.failed }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Uptime or link check failed"
+          keys=$(cat keys.txt)
+          existing=$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "\"$title\" in:title" --json number,title -q "map(select(.title == \"$title\"))[0].number // empty")
+          if [ "$FAILED" != "true" ]; then
+            if [ -n "$existing" ]; then
+              gh issue close "$existing" -R "$GITHUB_REPOSITORY" --comment "All checks pass again on $(date -u +%F). $RUN_URL"
+            fi
+            exit 0
+          fi
+          printf '\nRun: %s\n' "$RUN_URL" >> body.md
+          cat body.md >> "$GITHUB_STEP_SUMMARY"
+          if [ -z "$existing" ]; then
+            gh issue create -R "$GITHUB_REPOSITORY" --title "$title" --label "type:bug,area:site,risk:availability" --body-file body.md
+          else
+            previous=$(gh issue view "$existing" -R "$GITHUB_REPOSITORY" --json body -q .body | tr -d '\r' | sed -n 's/^<!-- failures: \(.*\) -->$/\1/p')
+            gh issue edit "$existing" -R "$GITHUB_REPOSITORY" --body-file body.md
+            if [ "$previous" != "$keys" ]; then
+              gh issue comment "$existing" -R "$GITHUB_REPOSITORY" --body "The failures changed on $(date -u +%F); the description now shows the current ones. $RUN_URL"
+            fi
+          fi
+          exit 1 # mark the run failed, so GitHub's failed-run email goes out too
