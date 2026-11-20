@@ -19,6 +19,7 @@
     { "route": "/tests/*", "statusCode": 404 },
     { "route": "/test-results/*", "statusCode": 404 },
     { "route": "/playwright-report/*", "statusCode": 404 },
+    { "route": "/lighthouse-results/*", "statusCode": 404 },
     { "route": "/blob-report/*", "statusCode": 404 },
     { "route": "/report.*", "statusCode": 404 },
     { "route": "/*.{log,pid,seed,lock,lcov,tsbuildinfo,tgz}", "statusCode": 404 },

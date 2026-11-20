@@ -82,8 +82,9 @@ Each risk has a `risk:*` label. Put the label on any work item that could cause 
 - **Mitigation in place:**
   - Design-system conventions (`CLAUDE.md`).
   - Preview review before merge.
+  - Lighthouse (#18): the `Lighthouse` CI job on every PR preview and on production after each deploy, plus a Monday run of production in `.github/workflows/a11y-weekly.yml`, which opens or updates a "Weekly Lighthouse check failed" Bug. Performance, best practices and SEO are checked against the thresholds in [D14](decisions.md#d14-lighthouse-thresholds-and-where-it-runs-2026-11-20-18).
 - **Planned:** image rules in `CLAUDE.md` once the site uses images (web formats, responsive sizes, alt text, originals kept out of the deployed folder).
-- **Scheduled checks (to build):** periodic Lighthouse performance and SEO checks, and a review at phone and desktop widths.
+- **Scheduled checks (to build):** a review at phone and desktop widths (#19).
 - **If it happens:** treat it as a Bug. Fix visible breakage before new work.
 
 ---

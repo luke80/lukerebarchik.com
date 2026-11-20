@@ -1,7 +1,8 @@
-name: Weekly accessibility scan
+name: Weekly accessibility and Lighthouse scans
 
-# WCAG 2.2 AA scan of production (#16, docs/risks.md). On failure it opens a
-# Bug, or comments on the open one, so a failed scheduled run is never silent.
+# WCAG 2.2 AA scan (#16) and Lighthouse check (#18, D14) of production (docs/risks.md).
+# Each opens its own Bug on failure, or comments on the open one, so a failed
+# scheduled run is never silent.
 on:
   schedule:
     - cron: "0 14 * * 1" # Mondays 14:00 UTC
@@ -58,4 +59,53 @@ jobs:
               --body "$note
 
           Each violation in the run log names the axe rule, its impact, a help link and the affected elements. Fix them as Bugs (docs/risks.md: a WCAG A/AA failure is High or Medium and is fixed before new work in the same area). Close this issue when the scan passes again."
+          fi
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    name: Lighthouse production
+    permissions:
+      contents: read
+      issues: write # open or update the failure issue
+    env:
+      BASE_URL: ${{ inputs.base_url || 'https://lukerebarchik.com' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Lighthouse (GA blocked, median of 3)
+        id: lighthouse
+        run: |
+          set +e
+          npm run -s lighthouse # prints the score table; per-run progress goes to stderr
+          code=$?
+          set -e
+          [ -f lighthouse-results/summary.md ] && cat lighthouse-results/summary.md >> "$GITHUB_STEP_SUMMARY"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          exit "$code"
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results
+          path: lighthouse-results/
+          retention-days: 30
+      # Only a score below its threshold (exit 1) opens an issue; a broken run (exit 2 or 3) just fails.
+      - name: Open or update the failure issue
+        if: failure() && steps.lighthouse.outputs.code == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Weekly Lighthouse check failed"
+          existing=$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "\"$title\" in:title" --json number,title -q "map(select(.title == \"$title\"))[0].number // empty")
+          { echo "The Lighthouse check of $BASE_URL ($GITHUB_EVENT_NAME run) found a score below its threshold on $(date -u +%F). Results and reports: $RUN_URL"; echo; cat lighthouse-results/summary.md; } > note.md
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" -R "$GITHUB_REPOSITORY" --body-file note.md
+          else
+            { cat note.md; echo; echo "Thresholds and the reasons for them are in docs/decisions.md (D14). Fix the regression as a Bug, or, if the drop is runner noise, re-run the workflow. Close this issue when the check passes again."; } > body.md
+            gh issue create -R "$GITHUB_REPOSITORY" --title "$title" --label "type:bug,area:site,risk:reputation" --body-file body.md
           fi

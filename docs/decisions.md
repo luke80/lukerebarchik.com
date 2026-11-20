@@ -2,6 +2,20 @@
 
 Newest first. Each entry says what was decided, why, and what was rejected. Link the PR or issue where it happened.
 
+## D14. Lighthouse thresholds and where it runs (2026-11-20, #18)
+
+- **Decision:** `scripts/lighthouse.mjs` (`npm run lighthouse`, Lighthouse 13.6.0 exact-pinned, run with Playwright's Chromium) checks `/` and `/privacy.html` on mobile and desktop, three runs each, and compares the median score with these thresholds:
+
+  | Form | Performance | Best practices | SEO |
+  | --- | --- | --- | --- |
+  | Mobile | 85 | 100 | 100 |
+  | Desktop | 95 | 100 | 100 |
+
+  It runs as the `Lighthouse` job after every PR preview and production deploy (reported, not a required check, like the Accessibility scan) and on Mondays against production in `a11y-weekly.yml`, which opens or comments on a "Weekly Lighthouse check failed" Bug when a score is below its threshold.
+- **Google Analytics is blocked entirely** in every run (`googletagmanager.com` and `google-analytics.com`), so runs never send hits and the scores measure the page itself, not GA's cost. The 6 baseline runs on 2026-11-20 did send page views before this was in place.
+- **Why these numbers:** the baseline on 2026-11-20 (with GA loading) was mobile performance 93 to 96, desktop 100, and 100 for best practices and SEO everywhere; with GA blocked, all 100. Performance gets headroom because GitHub's runners are noisier than a desktop PC; best practices and SEO are deterministic checklists, so any drop is a real change. Accessibility isn't scored here because the axe-core suite owns it (#16).
+- **Rejected:** Lighthouse CI (`@lhci/cli`): its newest release was 9 days old, and its upload targets aren't needed; the script uses Lighthouse's own CLI with fewer moving parts. Making the job a required check, because runner noise could block a merge. Letting GA load (a fake visit per run) or loading GA but blocking only its hits (Luke preferred to block it entirely).
+
 ## D13. Daily uptime and link check (2026-11-20, #17)
 
 - **Decision:** `.github/workflows/uptime.yml` runs `scripts/uptime.mjs` daily and on demand against https://lukerebarchik.com and the GitHub Pages mirror. It checks that `/`, `/index.html` and `/privacy.html` return 200, that a sample of blocked tooling paths return 404, that in-page `#anchors` exist, and that every link and asset on the pages (fonts, the other page, external links) works. A failure marks the run failed and keeps one "Uptime or link check failed" issue current, the same way as the npm audit (D11): comment only when the set of failures changes, close on the next passing run.
