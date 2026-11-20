@@ -14,13 +14,19 @@
 <script>
 try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch{/* storage blocked: keep the system theme */}
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9QFZLHV9WK"></script>
 <script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-9QFZLHV9WK');
+// Google Analytics (G-9QFZLHV9WK), loaded only when the browser doesn't send Global Privacy
+// Control (#34). With GPC on there is no gtag script, no cookie and no request to Google.
+if (!navigator.globalPrivacyControl) {
+  const gaScript = document.createElement('script');
+  gaScript.async = true;
+  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-9QFZLHV9WK';
+  document.head.appendChild(gaScript);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){dataLayer.push(arguments);};
+  window.gtag('js', new Date());
+  window.gtag('config', 'G-9QFZLHV9WK');
+}
 </script>
 <link rel="preload" href="fonts/archivo-latin-wdth-5.3.0.woff2" as="font" type="font/woff2" crossorigin>
 <style>
