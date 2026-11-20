@@ -151,4 +151,5 @@ shots/
 # Playwright test output
 test-results/
 playwright-report/
+lighthouse-results/
 blob-report/
