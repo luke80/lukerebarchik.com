@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Luke Rebarchik's personal/professional site, live at https://lukerebarchik.com (custom domain on an Azure Static Web App): a single static page. There is no build step; npm is used for ESLint, the local dev server and the accessibility scan.
+Luke Rebarchik's personal/professional site, live at https://lukerebarchik.com (custom domain on an Azure Static Web App): a single static page. There is no build step; npm is used for ESLint, the local dev server, the accessibility scan and copying the self-hosted fonts.
 
 - **Lint:** `npm ci` once, then `npm run lint` (`npm run lint:fix` for autofixes). `eslint.config.mjs` lints the HTML markup with `@html-eslint` and the inline `<script>` blocks with `eslint-plugin-html` + `@eslint/js` recommended. Whitespace/layout rules are deliberately off to allow the compact hand formatting.
 - **Preview locally:** `npm ci` once, then `npm run dev` and open http://localhost:4280. It runs the Azure Static Web Apps CLI (`swa start . --port 4280`, pinned to an exact version in `devDependencies`), which applies `staticwebapp.config.json`, so blocked paths return 404 locally too (but see the routing caveat below). Stop it with Ctrl+C.
@@ -23,7 +23,7 @@ Run `npm run lint`, then invoke the `code-reviewer` subagent (`.claude/agents/co
 
 ## Structure
 
-Everything lives in `index.html`: all CSS is inline in a `<style>` block in `<head>`, and the only JavaScript is the Google Analytics (gtag `G-9QFZLHV9WK`) snippet and two small inline scripts for the light/dark toggle (one in `<head>` applies the saved choice before paint, one at the end of `<body>` wires the button). Fonts (Archivo, IBM Plex Sans, IBM Plex Mono) load from Google Fonts. Keep it as one self-contained file unless asked otherwise.
+Everything lives in `index.html`: all CSS is inline in a `<style>` block in `<head>`, and the only JavaScript is the Google Analytics (gtag `G-9QFZLHV9WK`) snippet and two small inline scripts for the light/dark toggle (one in `<head>` applies the saved choice before paint, one at the end of `<body>` wires the button). Fonts (Archivo, IBM Plex Sans, IBM Plex Mono) are self-hosted in `fonts/` (Latin subsets, SIL OFL 1.1, licences alongside): `npm run fonts` (`scripts/fonts.mjs`) copies them from the exact-pinned Fontsource devDependencies, with the package version in each file name so `/fonts/*` can be served with a one-year immutable cache. After bumping a font package, rerun it and update the `@font-face` URLs and the preload in `index.html`. Don't add Google Fonts or other third-party requests back (privacy, #32). Keep it as one self-contained file unless asked otherwise.
 
 The files in `img/` (skylines, clouds, logo, profile photo, etc.) are leftovers from a previous version of the site and are **not referenced** by the current `index.html`.
 

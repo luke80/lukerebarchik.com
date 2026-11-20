@@ -2,6 +2,12 @@
 
 Newest first. Each entry says what was decided, why, and what was rejected. Link the PR or issue where it happened.
 
+## D9. Self-host the web fonts (2026-11-20, #32)
+
+- **Decision:** serve Archivo, IBM Plex Sans and IBM Plex Mono from lukerebarchik.com (Latin subsets from exact-pinned Fontsource packages) instead of Google Fonts.
+- **Why:** Google's font servers receive every visitor's IP address. Removing the request is better than disclosing it, and it leaves Google Analytics as the only third party for the privacy notice (#20) to cover.
+- **Rejected:** mentioning Google Fonts in the privacy notice (keeps the third-party request), and Google's download ZIPs (not pinned or repeatable).
+
 ## D8. Redesign: option D ("Signal") (2026-11-20, PR #29, part of #21)
 
 - **Decision:** the redesign ships as option D, "Signal": one self-contained `index.html` (inline CSS, Archivo and IBM Plex), white and charcoal with red as the single accent, light and dark themes with a saved toggle, and no photos.
