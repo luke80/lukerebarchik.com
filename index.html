@@ -3,11 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Luke Rebarchik</title>
+<title>Luke Rebarchik: solutions architect for platform rebuilds</title>
 <meta name="description" content="Luke Rebarchik, senior solutions architect. Recent work: Illinois DCFS data systems overhaul, Northern Trust public websites, Farm Journal media platforms. Available for contract and fractional work.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Luke Rebarchik: solutions architect for platform rebuilds">
+<meta property="og:description" content="Senior solutions architect in the Chicago area. Recent work for Illinois DCFS, Northern Trust and Farm Journal.">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://lukerebarchik.com/">
+<link rel="icon" href="favicon.ico">
+<script>
+try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch{/* storage blocked: keep the system theme */}
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9QFZLHV9WK"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -16,363 +22,243 @@ gtag('js', new Date());
 
 gtag('config', 'G-9QFZLHV9WK');
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-/* Layout: a systems drawing sheet. Expanded-type hero, three recent-project panels,
-   then sections on a grid with a mono "spec" rail on the left of each section. */
-:root{
-  --paper:#F3F5F4; --panel:#E7ECEA; --ink:#14212B; --muted:#52606A;
-  --line:#C9D2D0; --accent:#0F6E78; --accent-ink:#FFFFFF; --signal:#C98A12;
-  --display:"Archivo","Arial Narrow",Arial,sans-serif;
-  --body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
-}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#0F171D; --panel:#16222A; --ink:#E4ECEA; --muted:#97A6AC;
-  --line:#2A3943; --accent:#4FB7C1; --accent-ink:#0B1418; --signal:#E2AE45; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#0F171D; --panel:#16222A; --ink:#E4ECEA; --muted:#97A6AC;
-  --line:#2A3943; --accent:#4FB7C1; --accent-ink:#0B1418; --signal:#E2AE45; color-scheme:dark}
+/* "Signal": white and charcoal, slate for secondary text, red as the single accent.
+   --accent (#FA2E23) is for large type and marks only; small red text uses --accent-text, buttons use --cta. */
+:root{color-scheme:light;--paper:#FFFFFF;--panel:#F3F4F5;--ink:#24272B;--muted:#5A6573;--line:#D5D9DE;--rule:#24272B;--accent:#FA2E23;--accent-text:#B8160D;--cta:#A8120B;--cta-hover:#8E0F09;--cta-ink:#FFFFFF;--band:#24272B;--band-ink:#FFFFFF;--band-muted:#B8C0C8;--band-cta:#D11A10;--band-cta-hover:#B8160D;--band-cta-ink:#FFFFFF;--band-line:#3A3F45}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--paper:#1B1D20;--panel:#25282C;--ink:#EEF0F2;--muted:#A3ADB8;--line:#3A3F45;--rule:#EEF0F2;--accent:#FF5A50;--accent-text:#FF6B62;--cta:#FF5A50;--cta-hover:#FF7068;--cta-ink:#1B1D20;--band:#111315;--band-ink:#FFFFFF;--band-muted:#A3ADB8;--band-cta:#D11A10;--band-cta-hover:#B8160D;--band-cta-ink:#FFFFFF;--band-line:#3A3F45}}
+:root[data-theme="dark"]{color-scheme:dark;--paper:#1B1D20;--panel:#25282C;--ink:#EEF0F2;--muted:#A3ADB8;--line:#3A3F45;--rule:#EEF0F2;--accent:#FF5A50;--accent-text:#FF6B62;--cta:#FF5A50;--cta-hover:#FF7068;--cta-ink:#1B1D20;--band:#111315;--band-ink:#FFFFFF;--band-muted:#A3ADB8;--band-cta:#D11A10;--band-cta-hover:#B8160D;--band-cta-ink:#FFFFFF;--band-line:#3A3F45}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--paper);color:var(--ink);font:17px/1.6 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:8px 12px;z-index:20}.skip:focus{left:8px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+@media(max-width:560px){.wrap{padding:0 16px}}
+.mono{font:500 12px/1.45 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase}
+h1,h2,h3{font-family:"Archivo",sans-serif;line-height:1.02;letter-spacing:-.01em}
+h1{font-weight:850;font-size:clamp(50px,10vw,132px);font-variation-settings:"wdth" 68;letter-spacing:-.02em}
+h2{font-weight:800;font-size:clamp(32px,4.6vw,56px);font-variation-settings:"wdth" 74}
+h3{font-weight:700;font-size:21px;line-height:1.2}
+.r{color:var(--accent)}
+.btn{display:inline-block;padding:14px 22px;border-radius:3px;font-weight:600;text-decoration:none;background:var(--cta);color:var(--cta-ink);transition:background .15s}
+.btn:hover{background:var(--cta-hover)}
+.btn.ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}.btn.ghost:hover{background:color-mix(in srgb,currentColor 8%,transparent)}
+.lede{font-size:clamp(18px,1.7vw,21px);color:var(--muted);max-width:40ch}
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-underline-offset:3px}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
-.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-.mono{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+/* header */
+.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:2px solid var(--rule)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;height:64px}
+.brand{font:800 19px "Archivo",sans-serif;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand i{width:10px;height:10px;background:var(--accent);display:inline-block}
+nav{display:flex;align-items:center;gap:24px}nav a{text-decoration:none;font-size:15px;color:var(--muted)}nav a:hover{color:var(--ink)}
+nav .btn{padding:9px 14px;font-size:14px;color:var(--cta-ink)}nav .btn:hover{color:var(--cta-ink)}
+@media(max-width:760px){nav a:not(.btn){display:none}}
 
-header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
-.brand{font-family:var(--display);font-variation-settings:"wdth" 112;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
-nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
-nav a{color:var(--muted);text-decoration:none;font-size:.92rem}
-nav a:hover{color:var(--ink)}
-@media (max-width:640px){nav{display:none}}
+/* hero */
+.hero{padding:64px 0 0}
+.hero .meta{display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;color:var(--muted)}
+.live:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:1px}
+.hero h1{margin-top:28px}
+.hero .row{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;margin-top:28px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:760px){.hero .row{grid-template-columns:1fr}}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--rule);border-bottom:2px solid var(--rule);margin-top:64px}
+.nums div{padding:22px 20px 22px 0}.nums div+div{border-left:1px solid var(--line);padding-left:20px}
+.nums b{display:block;font:850 clamp(34px,4.6vw,56px) "Archivo";font-variation-settings:"wdth" 68;line-height:1}
+.nums span{color:var(--muted);font-size:14px}
+@media(max-width:560px){.nums{grid-template-columns:1fr}.nums div+div{border-left:0;border-top:1px solid var(--line);padding-left:0}}
 
-.hero .wrap{padding-block:72px 56px;display:grid;gap:26px}
-.status{display:inline-flex;align-items:center;gap:10px}
-.status i{width:9px;height:9px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 4px color-mix(in srgb,var(--signal) 25%,transparent)}
-h1{font-family:var(--display);font-variation-settings:"wdth" 125;font-weight:800;font-size:clamp(2.6rem,7.4vw,5.6rem);line-height:.98;letter-spacing:-.02em;margin:0;text-wrap:balance}
-h1 span{display:block}
-h1 span:last-child{color:var(--accent)}
-.lede{font-size:1.18rem;max-width:58ch;margin:0}
-.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.btn{display:inline-block;padding:12px 20px;font-weight:600;text-decoration:none;border:1.5px solid var(--accent);font-size:.98rem}
-.btn.primary{background:var(--accent);color:var(--accent-ink)}
-.btn.ghost{color:var(--accent)}
-.where{color:var(--muted);font-size:.95rem}
+/* sections */
+section.block{padding:96px 0;border-bottom:1px solid var(--line)}
+@media(max-width:560px){section.block{padding:64px 0}}
+.head{display:grid;grid-template-columns:200px 1fr;gap:24px;margin-bottom:44px}
+.head .mono{color:var(--muted);padding-top:12px}
+.head p.sub{color:var(--muted);margin-top:14px;max-width:56ch}
+@media(max-width:760px){.head{grid-template-columns:1fr;gap:8px}.head .mono{padding-top:0}}
+.mono .n{color:var(--accent-text)}
 
-/* recent work panels */
-.recent{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
-.recent .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding-block:0}
-.proj{padding:30px 26px 32px;border-left:1px solid var(--line);display:grid;gap:10px;align-content:start}
-.proj:first-child{border-left:0;padding-left:0}
-.proj .when{font-family:var(--mono);font-size:.8rem;color:var(--accent);font-variant-numeric:tabular-nums}
-.proj b{font-family:var(--display);font-variation-settings:"wdth" 100;font-weight:700;font-size:2.2rem;line-height:1}
-.proj h3{margin:0;font-size:1.1rem;font-weight:600;line-height:1.3}
-.proj p{margin:0;font-size:.95rem;color:var(--muted)}
-@media (max-width:860px){.recent .wrap{grid-template-columns:1fr}.proj{border-left:0;padding-left:0;padding-right:0}.proj+.proj{border-top:1px solid var(--line)}}
+/* recent work */
+.work{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:860px){.work{grid-template-columns:1fr}}
+.work article{border-top:4px solid var(--rule);padding-top:20px}
+.work .yrs{color:var(--muted)}
+.work b{display:block;font:850 64px/1 "Archivo";font-variation-settings:"wdth" 66;margin:14px 0 12px}
+.work article:first-child b{color:var(--accent)}
+.work p{color:var(--muted);margin-top:10px;font-size:16px}
+.pull{margin-top:64px;font:700 clamp(24px,3vw,36px)/1.25 "Archivo";font-variation-settings:"wdth" 85;max-width:30ch}
+.pull .r{box-shadow:inset 0 -.12em 0 var(--accent);color:inherit}
 
-section.block .wrap{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;padding-block:72px;border-bottom:1px solid var(--line)}
-.rail{display:grid;gap:8px;align-content:start;position:sticky;top:90px}
-.rail .mono:first-child{color:var(--accent)}
-h2{font-family:var(--display);font-variation-settings:"wdth" 118;font-weight:800;font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.05;margin:0 0 12px;text-wrap:balance}
-.intro{max-width:60ch;color:var(--muted);margin:0 0 32px}
-@media (max-width:760px){section.block .wrap{grid-template-columns:1fr;gap:14px;padding-block:52px}.rail{position:static}}
+/* services */
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:960px){.svc{grid-template-columns:1fr 1fr}}@media(max-width:560px){.svc{grid-template-columns:1fr}}
+.card{background:var(--panel);padding:26px 24px;border-radius:2px;display:flex;flex-direction:column;gap:10px}
+.card .mono{color:var(--accent-text)}
+.card p{color:var(--muted);font-size:15.5px}
+.card .proof{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);color:var(--ink);font-size:12px}
+.tools{margin-top:28px;color:var(--muted);font-size:15px;max-width:80ch}
+.tools .label{color:var(--ink)}
 
-.services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
-.svc{padding:26px 26px 28px 0;border-bottom:1px solid var(--line);display:grid;gap:8px;align-content:start}
-.svc:nth-child(even){padding-left:26px;padding-right:0;border-left:1px solid var(--line)}
-.svc h3{font-size:1.2rem;margin:0;font-weight:600}
-.svc p{margin:0;font-size:.98rem}
-.svc .proofline{font-size:.88rem;color:var(--muted);border-left:2px solid var(--signal);padding-left:10px}
-@media (max-width:760px){.services{grid-template-columns:1fr}.svc,.svc:nth-child(even){padding:22px 0;border-left:0}}
+/* experience */
+.xp{list-style:none;padding:0;border-top:2px solid var(--rule)}
+.xp li{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line)}
+.xp .when{color:var(--muted);padding-top:4px}
+.xp h3 span{font-weight:500;color:var(--muted);font-family:"IBM Plex Sans",sans-serif;font-size:17px}
+.xp p{color:var(--muted);margin-top:6px;font-size:16px;max-width:68ch}
+@media(max-width:760px){.xp li{grid-template-columns:1fr;gap:4px}}
+details.earlier{margin-top:8px;border-bottom:1px solid var(--line)}
+details.earlier summary{cursor:pointer;padding:20px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+details.earlier summary::-webkit-details-marker{display:none}
+details.earlier summary:after{content:"+";font:500 22px/1 "IBM Plex Mono";color:var(--accent-text)}
+details.earlier[open] summary:after{content:"−"}
+details.earlier .xp{border-top:1px solid var(--line)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+.facts p{color:var(--muted);margin-top:6px}
+@media(max-width:640px){.facts{grid-template-columns:1fr}}
 
-.modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.mode{border:1px solid var(--line);padding:22px;display:grid;gap:8px;align-content:start}
-.mode h3{margin:0;font-size:1.1rem}
-.mode p{margin:0;font-size:.95rem;color:var(--muted)}
-@media (max-width:860px){.modes{grid-template-columns:1fr}}
+/* hiring */
+.modes{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid var(--rule)}
+.modes div{padding:28px 24px}.modes div+div{border-left:1px solid var(--line)}
+.modes .mono{color:var(--accent-text)}.modes h3{margin-top:10px}.modes p{color:var(--muted);margin-top:10px;font-size:16px}
+@media(max-width:760px){.modes{grid-template-columns:1fr}.modes div+div{border-left:0;border-top:1px solid var(--line)}}
 
-.tl{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.tl > li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding:24px 0;border-bottom:1px solid var(--line)}
-.tl .when{font-family:var(--mono);font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px}
-.tl h3{margin:0;font-size:1.12rem;font-weight:600}
-.tl .org{color:var(--accent);font-weight:500}
-.tl .meta{font-size:.88rem;color:var(--muted);margin:2px 0 8px}
-.tl p{margin:0;max-width:66ch;font-size:.98rem}
-.tl ul{margin:8px 0 0;padding-left:18px;max-width:66ch;font-size:.95rem}
-.tl ul li{padding:2px 0}
-@media (max-width:600px){.tl > li{grid-template-columns:1fr;gap:4px}}
-
-.earlier-h{margin:44px 0 6px;font-size:1.05rem;font-weight:600}
-.earlier{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.earlier li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:.95rem}
-.earlier .when{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:2px}
-.earlier b{font-weight:600}
-.earlier span.d{color:var(--muted)}
-@media (max-width:600px){.earlier li{grid-template-columns:1fr;gap:2px}}
-
-.quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 40px}
-blockquote{margin:0;display:grid;gap:12px;align-content:start}
-blockquote p{margin:0;font-size:1.02rem;line-height:1.55}
-blockquote p::before{content:"\201C";color:var(--accent);font-family:var(--display);font-weight:800;font-size:1.6em;line-height:0;vertical-align:-.35em;margin-right:4px}
-blockquote footer{font-size:.88rem;color:var(--muted)}
+/* recommendations */
+.quotes{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+@media(max-width:760px){.quotes{grid-template-columns:1fr}}
+blockquote{border-left:4px solid var(--accent);padding-left:24px}
+blockquote p{font:600 clamp(19px,1.9vw,23px)/1.4 "Archivo";font-variation-settings:"wdth" 92}
+blockquote footer{color:var(--muted);margin-top:16px;font-size:15px}
 blockquote footer b{color:var(--ink);font-weight:600}
-@media (max-width:760px){.quotes{grid-template-columns:1fr}}
 
-.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
-.skills h3{font-size:.95rem;margin:0 0 10px;font-weight:600}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips span{font-size:.85rem;padding:4px 10px;background:var(--panel);border:1px solid var(--line)}
-.creds{margin-top:36px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.creds div{display:grid;gap:4px}
-.creds p{margin:0;font-size:.95rem}
-@media (max-width:860px){.skills{grid-template-columns:1fr}.creds{grid-template-columns:1fr}}
-
-.contact{background:var(--ink);color:var(--paper)}
-.contact .wrap{padding-block:72px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px}
-.contact h2{color:var(--paper)}
-.contact p{color:color-mix(in srgb,var(--paper) 80%,var(--ink));max-width:56ch}
-.contact .mono{color:color-mix(in srgb,var(--paper) 65%,var(--ink))}
-.contact ul{margin:0;padding:0;list-style:none;border-top:1px solid color-mix(in srgb,var(--paper) 25%,var(--ink))}
-.contact li{padding:14px 0;border-bottom:1px solid color-mix(in srgb,var(--paper) 25%,var(--ink))}
-.contact .btn.primary{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-@media (max-width:760px){.contact .wrap{grid-template-columns:1fr;padding-block:52px}}
-footer.bottom .wrap{padding-block:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+/* close */
+.close{background:var(--band);color:var(--band-ink);padding:104px 0}
+.close h2{font-size:clamp(40px,7vw,96px);font-variation-settings:"wdth" 66;max-width:12ch}
+.close .row{display:flex;justify-content:space-between;align-items:end;gap:32px;flex-wrap:wrap}
+.close p{color:var(--band-muted);max-width:40ch;margin-bottom:24px}
+.close .btn{background:var(--band-cta);color:var(--band-cta-ink)}.close .btn:hover{background:var(--band-cta-hover)}
+.foot{background:var(--band);color:var(--band-muted);border-top:1px solid var(--band-line);padding:24px 0;font-size:14px}
+.foot .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot a{text-decoration:none}.foot a:hover{color:var(--band-ink)}
+.theme{background:none;border:1.5px solid var(--line);color:var(--ink);border-radius:3px;width:38px;height:38px;display:inline-grid;place-items:center;cursor:pointer;padding:0}
+.theme:hover{border-color:var(--ink)}
+.theme svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}.theme .moon{fill:currentColor;stroke:none}
+.theme .sun{display:none}
+:root[data-theme="dark"] .theme .sun{display:block}:root[data-theme="dark"] .theme .moon{display:none}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme .sun{display:block}:root:not([data-theme="light"]) .theme .moon{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 
 <meta name="build" content="lukerebarchik.com 83a767f838a9 dev">
 </head>
 <body>
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="#top">Luke Rebarchik</a>
-    <nav aria-label="Main"><ul>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#engage">Hire me</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul></nav>
-  </div>
-</header>
+<a class="skip" href="#main">Skip to content</a>
 
-<main id="top">
-  <section class="hero">
-    <div class="wrap">
-      <div class="status mono"><i aria-hidden="true"></i>Available now · Contract &amp; fractional</div>
-      <h1><span>Data systems.</span><span>Modern web services.</span><span>Rebuilt right.</span></h1>
-      <p class="lede">Senior solutions architect. Most recently I led planning and development for a complete overhaul of the Illinois Department of Children and Family Services' internal data systems. Before that, four years at Northern Trust, ending as VP of Public Websites.</p>
-      <div class="cta">
-        <a class="btn primary" href="#contact">Start a conversation</a>
-        <a class="btn ghost" href="https://www.linkedin.com/in/lrebarchik/" target="_blank" rel="noopener">LinkedIn profile</a>
-      </div>
-      <div class="where">Wilmette, IL · Hybrid or remote · 25+ years leading technology teams</div>
-    </div>
-  </section>
+<header class="top"><div class="wrap">
+<a class="brand" href="#top"><i aria-hidden="true"></i>Luke Rebarchik</a>
+<nav aria-label="Primary"><a href="#work">Work</a><a href="#services">Services</a><a href="#experience">Experience</a><a href="#hiring">Hiring</a><button class="theme" type="button" id="theme" aria-label="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></svg></button><a class="btn" href="https://www.linkedin.com/in/lrebarchik/">Message me</a></nav>
+</div></header>
 
-  <div class="recent" aria-label="Recent work">
-    <div class="wrap">
-      <div class="proj">
-        <span class="when">2024 – 2026</span>
-        <b>Illinois DCFS</b>
-        <h3>$9.3M+ modernization and digital transformation</h3>
-        <p>Senior Solutions Architect on a large team of talented consultants from Krasan Consulting, and other providers. Development & M/O for a complete overhaul of Illinois DCFS call center data systems.</p>
-      </div>
-      <div class="proj">
-        <span class="when">2019 – 2024</span>
-        <b>Northern Trust</b>
-        <h3>Contractor to VP of Public Websites</h3>
-        <p>Joined on contract, converted to Lead Solutions Architect, then promoted to Senior Solutions Architect, VP of Public Websites, primary responsible party for www.northerntrust.com, a multi-billion dollar bank's front door.</p>
-      </div>
-      <div class="proj">
-        <span class="when">2017 – 2019</span>
-        <b>44M+</b>
-        <h3>Monthly engagements at Farm Journal</h3>
-        <p>Designed and supported the infrastructure behind the company's websites, newsletters, apps and paid data products.</p>
-      </div>
-    </div>
-  </div>
+<main id="main">
+<section class="hero" id="top"><div class="wrap">
+<div class="meta mono"><span class="live">Available now for contract and fractional work</span><span>Wilmette, IL · Hybrid or remote</span></div>
+<h1>Rebuild it once.<br>Rebuild it <span class="r">right.</span></h1>
+<div class="row">
+<p class="lede">Solutions architect for platform rebuilds. I plan and lead the replacement of systems people rely on, most recently the $9.3M+ overhaul of Illinois DCFS call center data systems.</p>
+<div class="ctas"><a class="btn" href="https://www.linkedin.com/in/lrebarchik/">Message me on LinkedIn</a><a class="btn ghost" href="#work">See recent work</a></div>
+</div>
+<div class="nums">
+<div><b>$9.3M+</b><span>Illinois DCFS modernization</span></div>
+<div><b>VP</b><span>Northern Trust public websites</span></div>
+<div><b>25+ yrs</b><span>Leading technology teams</span></div>
+</div>
+</div></section>
 
-  <section class="block" id="services">
-    <div class="wrap">
-      <div class="rail"><span class="mono">Services</span><span class="mono">What I do</span></div>
-      <div>
-        <h2>What I do</h2>
-        <p class="intro">Four things, each backed by work I've led.</p>
-        <div class="services">
-          <div class="svc">
-            <h3>Overhaul data systems</h3>
-            <p>Plan the replacement and lead the build.</p>
-            <div class="proofline">Illinois DCFS (2024–2026)</div>
-          </div>
-          <div class="svc">
-            <h3>Run enterprise web platforms</h3>
-            <p>Architecture, configuration, performance and security for large public web estates.</p>
-            <div class="proofline">Northern Trust public websites; Farm Journal's 44M+ monthly engagements</div>
-          </div>
-          <div class="svc">
-            <h3>Bring in DevOps</h3>
-            <p>Docker, automated testing and deployment automation for local and international teams.</p>
-            <div class="proofline">Farm Journal Media</div>
-          </div>
-          <div class="svc">
-            <h3>Choose and launch CRM</h3>
-            <p>Vendor selection, RFPs, implementation and adoption.</p>
-            <div class="proofline">SuiteCRM at Farm Journal; Microsoft Dynamics CRM at BYU</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="block" id="work"><div class="wrap">
+<div class="head"><p class="mono"><span class="n">01</span> / Recent work</p><div><h2>Three rebuilds. Three industries.</h2><p class="sub">Three programs from the last nine years: a state agency, a bank and a media company.</p></div></div>
+<div class="work">
+<article><p class="mono yrs">2024 to 2026</p><b>$9.3M+</b><h3>Illinois DCFS modernization</h3><p>Senior solutions architect with Krasan Consulting, leading development and planning for an overhaul of the department's call center data systems.</p></article>
+<article><p class="mono yrs">2019 to 2024</p><b>VP</b><h3>Northern Trust public websites</h3><p>Joined on contract, converted to lead architect, then VP of Public Websites, responsible for www.northerntrust.com.</p></article>
+<article><p class="mono yrs">2017 to 2019</p><b>44M+</b><h3>Farm Journal media platforms</h3><p>Infrastructure behind 44 million monthly engagements across the company's websites, newsletters, apps and paid data products.</p></article>
+</div>
+<p class="pull">Since 1997, I've rebuilt the systems an organization <span class="r">cannot switch off.</span></p>
+</div></section>
 
-  <section class="block" id="experience">
-    <div class="wrap">
-      <div class="rail"><span class="mono">Experience</span><span class="mono">Last 9 years</span></div>
-      <div>
-        <h2>Recent roles</h2>
-        <p class="intro">2017 to 2026, most recent first.</p>
-        <ol class="tl">
-          <li>
-            <div class="when">Jul 2024 – Apr 2026</div>
-            <div>
-              <h3>Senior Solutions Architect · <span class="org">Krasan Consulting Services</span></h3>
-              <div class="meta">Contract · Chicago, IL · Hybrid</div>
-              <p>Led development and planning for the Illinois Department of Children and Family Services in a complete overhaul of their internal data systems.</p>
-            </div>
-          </li>
-          <li>
-            <div class="when">Jul 2019 – Jan 2024</div>
-            <div>
-              <h3>Senior Solutions Architect, VP of Public Websites · <span class="org">Northern Trust</span></h3>
-              <div class="meta">Chicago, IL</div>
-              <ul>
-                <li>Senior Solutions Architect, VP of Public Websites, Jul 2020 – Jan 2024</li>
-                <li>Lead Solutions Architect, Nov 2019 – Jul 2020</li>
-                <li>Solutions Architect on contract through Swoon, Jul – Nov 2019, then converted to full-time</li>
-              </ul>
-            </div>
-          </li>
-          <li>
-            <div class="when">Mar 2019 – Jul 2019</div>
-            <div>
-              <h3>Associate Director of Web Development · <span class="org">Rise Interactive</span></h3>
-              <div class="meta">Chicago, IL</div>
-            </div>
-          </li>
-          <li>
-            <div class="when">Jan 2019 – Mar 2019</div>
-            <div>
-              <h3>Software Development Manager · <span class="org">Photon</span></h3>
-              <div class="meta">Deerfield, IL</div>
-              <p>Built a developer documentation suite directly with Discover Financial Services.</p>
-            </div>
-          </li>
-          <li>
-            <div class="when">Jul 2017 – Jan 2019</div>
-            <div>
-              <h3>Solutions Architect · <span class="org">Farm Journal Media</span></h3>
-              <div class="meta">Chicago, IL · Started as Lead Web Developer (Drupal), promoted Mar 2018</div>
-              <ul>
-                <li>Infrastructure for 44+ million monthly engagements on Drupal 8 and SuiteCRM.</li>
-                <li>Oversaw multiple international development teams.</li>
-                <li>Introduced Docker workflows, Composer packaging, unit testing and deployment automation.</li>
-                <li>Advised on the CRM implementation.</li>
-              </ul>
-            </div>
-          </li>
-        </ol>
+<section class="block" id="services"><div class="wrap">
+<div class="head"><p class="mono"><span class="n">02</span> / Services</p><div><h2>Four things I do well</h2><p class="sub">Each one backed by a program I led.</p></div></div>
+<div class="svc">
+<div class="card"><span class="mono">01</span><h3>Overhaul data systems</h3><p>Plan the replacement and lead the build.</p><p class="mono proof">Illinois DCFS, $9.3M+</p></div>
+<div class="card"><span class="mono">02</span><h3>Run enterprise web platforms</h3><p>Architecture, performance and security for large public web estates.</p><p class="mono proof">Northern Trust, VP of Public Websites</p></div>
+<div class="card"><span class="mono">03</span><h3>Bring in DevOps</h3><p>Docker, automated testing and deployment automation for local and international teams.</p><p class="mono proof">Farm Journal, 44M+ monthly</p></div>
+<div class="card"><span class="mono">04</span><h3>Choose and launch a CRM</h3><p>Vendor selection, RFPs, implementation and adoption.</p><p class="mono proof">SuiteCRM, Dynamics CRM</p></div>
+</div>
+<p class="tools"><span class="mono label">Toolkit</span> &nbsp;AWS, Microsoft Azure, Docker, Composer, Git, automated testing, Drupal, WordPress, SuiteCRM, Microsoft Dynamics CRM, Salesforce, .NET, SQL Server, JavaScript, Google Analytics, Tableau, project management and WCAG audits.</p>
+</div></section>
 
-        <h3 class="earlier-h">Earlier career</h3>
-        <ul class="earlier">
-          <li><span class="when">2011 – 2017</span><span><b>BYU Independent Study</b>, Website Administrator &amp; Business Process Manager. <span class="d">Led the group building Drupal and WordPress modules for all campus sites (35,000+ students). Content problems cut 3x, from 403 to 133. Product hits up 12%+ quarter over quarter.</span></span></li>
-          <li><span class="when">2010 – 2011</span><span><b>Five Star Franchising</b>, Sr. Software and Web Content Designer. <span class="d">Project-managed the SaaS replacement for a .NET CRM and quoting app.</span></span></li>
-          <li><span class="when">2002 – 2010</span><span><b>rWorld Solutions</b>, Co-Founder. <span class="d">Technical consulting and data solutions, including CRM integration.</span></span></li>
-          <li><span class="when">2004 – 2009</span><span><b>Brigham Young University</b>, IT/Data Consultant. <span class="d">Ticketing systems and Visa PCI compliance review.</span></span></li>
-          <li><span class="when">2002 – 2003</span><span><b>Brighton Marketing</b>, Software Developer. <span class="d">Price-tracking data system.</span></span></li>
-          <li><span class="when">1997 – 1999</span><span><b>Apex Interactive</b>, Web Developer and Designer. <span class="d">First-generation e-commerce shopping carts.</span></span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
+<section class="block" id="experience"><div class="wrap">
+<div class="head"><p class="mono"><span class="n">03</span> / Experience</p><div><h2>Roles from 2017 to 2026</h2></div></div>
+<ol class="xp">
+<li><p class="mono when">Jul 2024 to Apr 2026</p><div><h3>Senior Solutions Architect <span>at Krasan Consulting Services</span></h3><p>Contract, Chicago, hybrid. Led development and planning for the Illinois Department of Children and Family Services' data systems overhaul.</p></div></li>
+<li><p class="mono when">Jul 2019 to Jan 2024</p><div><h3>Senior Solutions Architect, VP of Public Websites <span>at Northern Trust</span></h3><p>Contract through Swoon from Jul 2019, Lead Solutions Architect from Nov 2019, VP of Public Websites from Jul 2020.</p></div></li>
+<li><p class="mono when">Mar 2019 to Jul 2019</p><div><h3>Associate Director of Web Development <span>at Rise Interactive</span></h3><p>Chicago.</p></div></li>
+<li><p class="mono when">Jan 2019 to Mar 2019</p><div><h3>Software Development Manager <span>at Photon</span></h3><p>Built a developer documentation suite with Discover Financial Services.</p></div></li>
+<li><p class="mono when">Jul 2017 to Jan 2019</p><div><h3>Solutions Architect <span>at Farm Journal Media</span></h3><p>Lead Web Developer (Drupal), promoted in Mar 2018. Drupal 8 and SuiteCRM for 44M+ monthly engagements; Docker and deployment automation for international teams.</p></div></li>
+</ol>
+<details class="earlier"><summary>Earlier career, 1997 to 2017</summary>
+<ol class="xp">
+<li><p class="mono when">2011 to 2017</p><div><h3>Website Administrator and Business Process Manager <span>at BYU Independent Study</span></h3><p>Led Drupal and WordPress module work for all campus sites (35,000+ students). Content problems cut from 403 to 133, and product hits up 12%+ quarter over quarter.</p></div></li>
+<li><p class="mono when">2010 to 2011</p><div><h3>Sr. Software and Web Content Designer <span>at Five Star Franchising</span></h3><p>Project-managed the SaaS replacement for a .NET CRM and quoting app.</p></div></li>
+<li><p class="mono when">2002 to 2010</p><div><h3>Co-Founder <span>at rWorld Solutions</span></h3><p>Technical consulting and data solutions, including CRM integration.</p></div></li>
+<li><p class="mono when">2004 to 2009</p><div><h3>IT and Data Consultant <span>at Brigham Young University</span></h3><p>Ticketing systems and Visa PCI compliance review.</p></div></li>
+<li><p class="mono when">2002 to 2003</p><div><h3>Software Developer <span>at Brighton Marketing</span></h3><p>Price-tracking data system.</p></div></li>
+<li><p class="mono when">1997 to 1999</p><div><h3>Web Developer and Designer <span>at Apex Interactive</span></h3><p>First-generation e-commerce shopping carts.</p></div></li>
+</ol>
+</details>
+<div class="facts">
+<div><p class="mono">Education</p><p>Brigham Young University, BA, Theatre Arts Management and Acting</p></div>
+<div><p class="mono">Languages</p><p>English (native), German (professional working proficiency)</p></div>
+</div>
+</div></section>
 
-  <section class="block" id="engage">
-    <div class="wrap">
-      <div class="rail"><span class="mono">Engagement</span><span class="mono">How to hire me</span></div>
-      <div>
-        <h2>Three ways to hire me</h2>
-        <p class="intro">Pick what fits your budget and timeline.</p>
-        <div class="modes">
-          <div class="mode"><span class="mono">Contract</span><h3>On your team</h3><p>Full-time contract. Chicago-area hybrid or remote.</p></div>
-          <div class="mode"><span class="mono">Fractional</span><h3>A few days a week</h3><p>Senior architecture without a full-time hire.</p></div>
-          <div class="mode"><span class="mono">Project</span><h3>Fixed-scope review</h3><p>An assessment of your architecture, platform or rollout, with a written recommendation.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="block" id="hiring"><div class="wrap">
+<div class="head"><p class="mono"><span class="n">04</span> / Hiring</p><div><h2>Contract, fractional or project</h2><p class="sub">Pick what fits your budget and timeline. Chicago-area hybrid or remote.</p></div></div>
+<div class="modes">
+<div><p class="mono">Contract</p><h3>On your team</h3><p>A full-time contract on your program, from planning through launch.</p></div>
+<div><p class="mono">Fractional</p><h3>A few days a week</h3><p>Senior architecture without a full-time hire.</p></div>
+<div><p class="mono">Project</p><h3>A fixed-scope review</h3><p>An assessment of your architecture, platform or rollout, with a written recommendation.</p></div>
+</div>
+</div></section>
 
-  <section class="block" id="recommend">
-    <div class="wrap">
-      <div class="rail"><span class="mono">Recommendations</span><span class="mono">BYU colleagues</span></div>
-      <div>
-        <h2>In their words</h2>
-        <div class="quotes">
-          <blockquote>
-            <p>Luke is an exceptional collaborator who excels at reaching across departments and programs to develop truly innovat[iv]e solutions and bring people together in pursuit of a shared vision.</p>
-            <footer><b>Wendy Simmerman</b> · Head of Tutors &amp; TAs, BYU Independent Study</footer>
-          </blockquote>
-          <blockquote>
-            <p>Luke constantly searches for more efficient means to accomplishing tasks and collecting meaningful data. He is consistent in his search for a clear direction and path to accomplish the big picture.</p>
-            <footer><b>Brian Pendleton</b> · Educational Services Administrator, Brigham Young University</footer>
-          </blockquote>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="skills">
-    <div class="wrap">
-      <div class="rail"><span class="mono">Toolkit</span></div>
-      <div>
-        <h2>Toolkit</h2>
-        <div class="skills">
-          <div><h3>Cloud and delivery</h3><div class="chips"><span>AWS</span><span>Microsoft Azure</span><span>DevOps</span><span>Docker</span><span>Composer</span><span>Git</span><span>Automated testing</span></div></div>
-          <div><h3>Platforms and CRM</h3><div class="chips"><span>Drupal 8</span><span>WordPress</span><span>SuiteCRM</span><span>Microsoft Dynamics CRM</span><span>Salesforce</span><span>.NET</span><span>SQL Server</span></div></div>
-          <div><h3>Practice</h3><div class="chips"><span>Project management</span><span>System architecture</span><span>JavaScript</span><span>Google Analytics</span><span>Tableau</span><span>WCAG</span></div></div>
-        </div>
-        <div class="creds">
-          <div><span class="mono">Education</span><p>Brigham Young University, BA, Theatre Arts Management / Acting</p></div>
-          <div><span class="mono">Languages</span><p>English (native) · German (professional working proficiency)</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="contact" id="contact">
-    <div class="wrap">
-      <div>
-        <span class="mono">Contact</span>
-        <h2>Let's talk.</h2>
-        <p>Message me on LinkedIn with what you're working on and the technologies involved.</p>
-        <div class="cta"><a class="btn primary" href="https://www.linkedin.com/in/lrebarchik/" target="_blank" rel="noopener">Message me on LinkedIn</a></div>
-      </div>
-      <div>
-        <span class="mono">Reach out about</span>
-        <ul>
-          <li>A contract or fractional architect role</li>
-          <li>A system or platform decision</li>
-          <li>Professional references</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+<section class="block" id="recommendations"><div class="wrap">
+<div class="head"><p class="mono"><span class="n">05</span> / Recommendations</p><div><h2>What colleagues say</h2></div></div>
+<div class="quotes">
+<blockquote><p>Luke is an exceptional collaborator who excels at reaching across departments and programs to develop truly innovative solutions and bring people together in pursuit of a shared vision.</p><footer><b>Wendy Simmerman</b>, Head of Tutors and TAs, BYU Independent Study</footer></blockquote>
+<blockquote><p>Luke constantly searches for more efficient means to accomplishing tasks and collecting meaningful data. He is consistent in his search for a clear direction and path to accomplish the big picture.</p><footer><b>Brian Pendleton</b>, Educational Services Administrator, Brigham Young University</footer></blockquote>
+</div>
+</div></section>
 </main>
 
-<footer class="bottom">
-  <div class="wrap mono"><span>© 2026 Luke Rebarchik</span><span>Wilmette, Illinois</span></div>
-</footer>
-
+<section class="close" id="contact" aria-labelledby="contact-h"><div class="wrap"><div class="row">
+<h2 id="contact-h">What needs rebuilding?</h2>
+<div><p>Send what you're working on and the technologies involved. A contract or fractional role, a system decision, or a reference request.</p><a class="btn" href="https://www.linkedin.com/in/lrebarchik/">Message me on LinkedIn</a></div>
+</div></div></section>
+<footer class="foot"><div class="wrap">
+<span>© 2026 Luke Rebarchik · Solutions architect in Wilmette, Illinois</span>
+<span><a href="#work">Work</a> · <a href="#services">Services</a> · <a href="#experience">Experience</a> · <a href="#hiring">Hiring</a></span>
+</div></footer>
+<script>
+(function(){
+var r=document.documentElement,b=document.getElementById('theme');
+function isDark(){var d=r.getAttribute('data-theme');return d?d==='dark':matchMedia('(prefers-color-scheme: dark)').matches;}
+function label(){b.setAttribute('aria-label',isDark()?'Switch to light mode':'Switch to dark mode');}
+label();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',label);
+b.addEventListener('click',function(){var next=isDark()?'light':'dark';r.setAttribute('data-theme',next);try{localStorage.setItem('theme',next);}catch{/* storage blocked: keep the system theme */}label();});
+})();
+</script>
 <!-- build: lukerebarchik.com 83a767f838a9 dev -->
 </body>
 </html>

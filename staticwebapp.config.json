@@ -15,6 +15,7 @@
     { "route": "/out/*", "statusCode": 404 },
     { "route": "/dist/*", "statusCode": 404 },
     { "route": "/scripts/*", "statusCode": 404 },
+    { "route": "/shots/*", "statusCode": 404 },
     { "route": "/tests/*", "statusCode": 404 },
     { "route": "/test-results/*", "statusCode": 404 },
     { "route": "/playwright-report/*", "statusCode": 404 },

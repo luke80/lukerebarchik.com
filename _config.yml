@@ -28,6 +28,7 @@ exclude:
   - out/
   - dist/
   - scripts/
+  - shots/
   - tests/
   - test-results/
   - playwright-report/
