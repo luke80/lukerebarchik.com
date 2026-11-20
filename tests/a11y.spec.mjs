@@ -4,7 +4,7 @@ import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
 const WCAG_22_AA = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
-const PAGES = ["/"];
+const PAGES = ["/", "/privacy.html"];
 
 for (const path of PAGES) {
   test(`no WCAG 2.2 AA violations on ${path}`, async ({ page }, testInfo) => {

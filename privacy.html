@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy · Luke Rebarchik</title>
+<meta name="description" content="What lukerebarchik.com collects through Google Analytics, how long it is kept, and how to opt out, including Global Privacy Control.">
+<link rel="canonical" href="https://lukerebarchik.com/privacy.html">
+<link rel="icon" href="favicon.ico">
+<script>
+try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch{/* storage blocked: keep the system theme */}
+</script>
+<script>
+// Google Analytics (G-9QFZLHV9WK), loaded only when the browser doesn't send Global Privacy
+// Control (#34). With GPC on there is no gtag script, no cookie and no request to Google.
+if (!navigator.globalPrivacyControl) {
+  const gaScript = document.createElement('script');
+  gaScript.async = true;
+  gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-9QFZLHV9WK';
+  document.head.appendChild(gaScript);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){dataLayer.push(arguments);};
+  window.gtag('js', new Date());
+  // The _ga cookies expire 2 months (60 days, in seconds) after the latest visit, matching GA's data retention (#20).
+  window.gtag('config', 'G-9QFZLHV9WK', { cookie_expires: 60 * 24 * 60 * 60 });
+}
+</script>
+<link rel="preload" href="fonts/archivo-latin-wdth-5.3.0.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Shared with index.html: fonts, colour tokens, base type, header, theme toggle and footer.
+   Copied verbatim from index.html; keep the two in sync when either changes. */
+@font-face{font-family:"Archivo";font-style:normal;font-weight:100 900;font-stretch:62% 125%;font-display:swap;src:url(fonts/archivo-latin-wdth-5.3.0.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-sans-latin-400-5.3.0.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-sans-latin-600-5.3.0.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-mono-latin-500-5.3.0.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{color-scheme:light;--paper:#FFFFFF;--panel:#F3F4F5;--ink:#24272B;--muted:#4A535E;--line:#D5D9DE;--rule:#24272B;--accent:#FA2E23;--accent-text:#B8160D;--cta:#A8120B;--cta-hover:#8E0F09;--cta-ink:#FFFFFF;--band:#24272B;--band-ink:#FFFFFF;--band-muted:#B8C0C8;--band-cta:#D11A10;--band-cta-hover:#B8160D;--band-cta-ink:#FFFFFF;--band-line:#3A3F45}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--paper:#1B1D20;--panel:#25282C;--ink:#EEF0F2;--muted:#ABB4BE;--line:#3A3F45;--rule:#EEF0F2;--accent:#FF5A50;--accent-text:#FF6B62;--cta:#FF5A50;--cta-hover:#FF7068;--cta-ink:#1B1D20;--band:#111315;--band-ink:#FFFFFF;--band-muted:#A3ADB8;--band-cta:#D11A10;--band-cta-hover:#B8160D;--band-cta-ink:#FFFFFF;--band-line:#3A3F45}}
+:root[data-theme="dark"]{color-scheme:dark;--paper:#1B1D20;--panel:#25282C;--ink:#EEF0F2;--muted:#ABB4BE;--line:#3A3F45;--rule:#EEF0F2;--accent:#FF5A50;--accent-text:#FF6B62;--cta:#FF5A50;--cta-hover:#FF7068;--cta-ink:#1B1D20;--band:#111315;--band-ink:#FFFFFF;--band-muted:#A3ADB8;--band-cta:#D11A10;--band-cta-hover:#B8160D;--band-cta-ink:#FFFFFF;--band-line:#3A3F45}
+*{box-sizing:border-box;margin:0}
+body{background:var(--paper);color:var(--ink);font:17px/1.6 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:8px 12px;z-index:20}.skip:focus{left:8px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+@media(max-width:560px){.wrap{padding:0 16px}}
+.mono{font:500 12px/1.45 "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase}
+h1,h2,h3{font-family:"Archivo",sans-serif;line-height:1.02;letter-spacing:-.01em}
+.btn{display:inline-block;padding:14px 22px;border-radius:3px;font-weight:600;text-decoration:none;background:var(--cta);color:var(--cta-ink);transition:background .15s}
+.btn:hover{background:var(--cta-hover)}
+.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:2px solid var(--rule)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;height:64px}
+.brand{font:800 19px "Archivo",sans-serif;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand i{width:10px;height:10px;background:var(--accent);display:inline-block}
+nav{display:flex;align-items:center;gap:24px}nav a{text-decoration:none;font-size:15px;color:var(--muted)}nav a:hover{color:var(--ink)}
+nav .btn{padding:9px 14px;font-size:14px;color:var(--cta-ink)}nav .btn:hover{color:var(--cta-ink)}
+@media(max-width:760px){nav a:not(.btn){display:none}}
+.foot{background:var(--band);color:var(--band-muted);border-top:1px solid var(--band-line);padding:24px 0;font-size:14px}
+.foot .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot a{text-decoration:none}.foot a:hover{color:var(--band-ink)}
+.theme{background:none;border:1.5px solid var(--line);color:var(--ink);border-radius:3px;width:38px;height:38px;display:inline-grid;place-items:center;cursor:pointer;padding:0}
+.theme:hover{border-color:var(--ink)}
+.theme svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}.theme .moon{fill:currentColor;stroke:none}
+.theme .sun{display:none}
+:root[data-theme="dark"] .theme .sun{display:block}:root[data-theme="dark"] .theme .moon{display:none}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme .sun{display:block}:root:not([data-theme="light"]) .theme .moon{display:none}}
+/* Privacy page */
+.doc{padding:72px 0 96px}
+.doc .wrap > *{max-width:68ch}
+.doc h1{font-weight:850;font-size:clamp(44px,7vw,80px);font-variation-settings:"wdth" 68;letter-spacing:-.02em;margin-bottom:12px}
+.doc .updated{color:var(--muted);margin-bottom:40px}
+.doc h2{font-weight:800;font-size:clamp(24px,3vw,32px);font-variation-settings:"wdth" 74;margin:44px 0 12px}
+.doc p+p,.doc p+ul,.doc ul+p{margin-top:14px}
+.doc ul{padding-left:1.2em}.doc li+li{margin-top:6px}
+.doc code{font:500 .9em "IBM Plex Mono",monospace}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="./"><i aria-hidden="true"></i>Luke Rebarchik</a>
+<nav aria-label="Primary"><a href="./#work">Work</a><a href="./#services">Services</a><a href="./#experience">Experience</a><a href="./#hiring">Hiring</a><button class="theme" type="button" id="theme" aria-label="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></svg></button><a class="btn" href="https://www.linkedin.com/in/lrebarchik/">Message me</a></nav>
+</div></header>
+
+<main id="main" class="doc"><div class="wrap">
+<h1>Privacy</h1>
+<p class="updated">Last updated 20 November 2026</p>
+<p>lukerebarchik.com is the professional website of Luke Rebarchik. It has no forms, accounts or comments. Apart from what its web host needs to deliver the pages, the only information collected about visitors is what Google Analytics records, as described below.</p>
+
+<h2>Google Analytics</h2>
+<p>The site uses Google Analytics 4 to measure visits and clicks on links to other websites, chiefly the links to Luke Rebarchik's LinkedIn profile. For each visit, Google Analytics records:</p>
+<ul>
+<li>the pages viewed, their titles and the previous page;</li>
+<li>clicks on links that lead to other websites, and whether a visitor scrolled most of the way (90%) down a page;</li>
+<li>approximate location (city, region and country), which Google derives from the visitor's IP address;</li>
+<li>the browser, operating system, device type, screen resolution and language.</li>
+</ul>
+<p>Google states that Google Analytics discards raw IP addresses after use and never associates them with user identifiers. Google signals, which adds demographic and interest data from signed-in Google accounts, is turned off for this site.</p>
+
+<h2>Cookies and browser storage</h2>
+<p>Google Analytics sets two first-party cookies, <code>_ga</code> and <code>_ga_</code> followed by an identifier, to tell visitors and sessions apart. On this site they expire at most two months after the most recent visit; some browsers delete them sooner.</p>
+<p>If a visitor uses the light and dark switch, that choice is saved in their own browser (local storage) and is never sent anywhere.</p>
+
+<h2>How long data is kept</h2>
+<p>Google Analytics deletes user-level and event-level data for this site after two months. Totals in Google's standard aggregated reports, such as the number of visits in a month, are not affected by that setting and are kept longer.</p>
+
+<h2>Global Privacy Control and other choices</h2>
+<p>If a browser sends Global Privacy Control, this site does not load Google Analytics at all: no script, no cookies and no data sent to Google. Brave and DuckDuckGo send this signal by default, and Firefox offers it as a setting.</p>
+<p>Visitors can also block cookies or scripts in their browser, use a content blocker, or install <a href="https://tools.google.com/dlpage/gaoptout">Google's opt-out browser add-on</a>.</p>
+
+<h2>Fonts and hosting</h2>
+<p>Fonts are served from this site, not from a third party. The site is hosted on Microsoft Azure, which, like any web host, receives each visitor's IP address and request details in order to deliver the pages.</p>
+
+<h2>Questions</h2>
+<p>Questions about this notice can be sent to Luke Rebarchik on <a href="https://www.linkedin.com/in/lrebarchik/">LinkedIn</a>.</p>
+</div></main>
+
+<footer class="foot"><div class="wrap">
+<span>© 2026 Luke Rebarchik · Solutions architect in Wilmette, Illinois</span>
+<span><a href="./#work">Work</a> · <a href="./#services">Services</a> · <a href="./#experience">Experience</a> · <a href="./#hiring">Hiring</a> · <a href="privacy.html" aria-current="page">Privacy</a></span>
+</div></footer>
+<script>
+(function(){
+var r=document.documentElement,b=document.getElementById('theme');
+function isDark(){var d=r.getAttribute('data-theme');return d?d==='dark':matchMedia('(prefers-color-scheme: dark)').matches;}
+function label(){b.setAttribute('aria-label',isDark()?'Switch to light mode':'Switch to dark mode');}
+label();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',label);
+b.addEventListener('click',function(){var next=isDark()?'light':'dark';r.setAttribute('data-theme',next);try{localStorage.setItem('theme',next);}catch{/* storage blocked: keep the system theme */}label();});
+})();
+</script>
+</body>
+</html>

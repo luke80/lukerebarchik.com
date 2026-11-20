@@ -2,6 +2,13 @@
 
 Newest first. Each entry says what was decided, why, and what was rejected. Link the PR or issue where it happened.
 
+## D10. Privacy: a separate notice page, 2-month cookie, and Global Privacy Control (2026-11-20, #20, #34)
+
+- **Decision:** the privacy notice is its own page (`/privacy.html`), written formally in the third person, linked from both footers. GA's event and user data retention are 2 months, the `_ga` cookies expire 2 months after the latest visit (`cookie_expires`), Google signals is off, and GA doesn't load at all when the browser sends Global Privacy Control.
+- **Why:** be open about analytics rather than add a consent banner (A7). Matching the cookie to the retention lets the notice say "two months" without a caveat. GPC lets visitors opt out without visiting a settings page.
+- **Rejected:** a section on the home page (adds weight to the résumé), a cookie banner (decided against on 2026-11-19), and disclosing the default 2-year cookie.
+- **Facts:** the notice's claims about Google Analytics were checked against Google's help pages on 2026-11-20. Google's current page says raw IP addresses are collected for location, then discarded after use; an older line saying GA4 doesn't log or store IP addresses was not used.
+
 ## D9. Self-host the web fonts (2026-11-20, #32)
 
 - **Decision:** serve Archivo, IBM Plex Sans and IBM Plex Mono from lukerebarchik.com (Latin subsets from exact-pinned Fontsource packages) instead of Google Fonts.
