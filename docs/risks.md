@@ -51,8 +51,8 @@ Each risk has a `risk:*` label. Put the label on any work item that could cause 
   - The repo is treated as public, so no personal data is kept in it (A10).
   - Fonts are self-hosted, so Google Analytics is the only third party the page contacts (#32).
   - Google Analytics doesn't load at all when the browser sends Global Privacy Control (#34), checked by `tests/gpc.spec.mjs`.
+  - A privacy notice (`/privacy.html`, #20) says what Google Analytics collects, the 2-month cookie and data retention (both set to GA's minimum), and how to opt out (A7).
 - **Planned:**
-  - A privacy notice saying what Google Analytics collects and for how long, with GA retention set to the minimum (A7).
   - The contact form (A4) will need its own data-handling and retention plan.
   - Logs must never contain more personal data than the notice allows.
 - **If it happens:** stop the collection, update the notice, and delete the data where possible.
