@@ -1,13 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-type="service" data-radius="soft" data-buttons="arrow" data-motion>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Luke Rebarchik</title>
+<title>Luke Rebarchik: solutions architect for platform rebuilds</title>
 <meta name="description" content="Luke Rebarchik, senior solutions architect. Recent work: Illinois DCFS data systems overhaul, Northern Trust public websites, Farm Journal media platforms. Available for contract and fractional work.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Luke Rebarchik: solutions architect for platform rebuilds">
+<meta property="og:description" content="Senior solutions architect in the Chicago area. Recent work for Illinois DCFS, Northern Trust and Farm Journal.">
+<meta property="og:image" content="https://lukerebarchik.com/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lukerebarchik.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<!-- eslint-disable-next-line @html-eslint/use-baseline -- progressive: browsers without it ignore it -->
+<meta name="theme-color" content="#f7f8f3">
+<meta name="site-kind" content="other">
+<meta name="page-type" content="service">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9QFZLHV9WK"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -16,363 +25,276 @@ gtag('js', new Date());
 
 gtag('config', 'G-9QFZLHV9WK');
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400..700&family=Libre+Franklin:wght@400..600&display=swap" rel="stylesheet">
+<!-- The design system (design-taste-frontend kit, copied as plain files): system, cards, motion, layout, icons -->
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<link rel="stylesheet" href="assets/diagrams/diagram.css">
 <style>
-/* Layout: a systems drawing sheet. Expanded-type hero, three recent-project panels,
-   then sections on a grid with a mono "spec" rail on the left of each section. */
-:root{
-  --paper:#F3F5F4; --panel:#E7ECEA; --ink:#14212B; --muted:#52606A;
-  --line:#C9D2D0; --accent:#0F6E78; --accent-ink:#FFFFFF; --signal:#C98A12;
-  --display:"Archivo","Arial Narrow",Arial,sans-serif;
-  --body:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+/* Luke's own colours through start.mjs brand (near-white #F7F8F3 ground, charcoal #26292D ink, #7FC0FA surface, #A8120B action; #607080 muted darkened to #414953 for contrast), type "source-serif" as dealt (the first pairing, Rethink Sans, failed the hero-lines stress test). The kit has no dark mode:
+   a dark page is for tech kinds only, so the page is the one light grade. */
+:root {
+  --p-bg: #f7f8f3; --p-surface: #7fc0fa; --p-ink: #26292d; --p-muted: #414953;
+  --p-accent: #a8120b; --p-accent-ink: #f7f8f3; --p-action: #a8120b; --p-action-ink: #f7f8f3;
+  --p-inv-bg: #26292d; --p-inv-surface: #323539; --p-inv-ink: #f7f8f3; --p-inv-muted: #a0a3a2;
+  --p-inv-accent: #f7f8f3; --p-inv-accent-ink: #26292d; --p-inv-action: #f7f8f3; --p-inv-action-ink: #26292d;
+  --font-display: "Source Serif 4", Georgia, serif;
+  --font-text: "Libre Franklin", system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.02em;
+  --display-tracking-xl: -0.026em;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#0F171D; --panel:#16222A; --ink:#E4ECEA; --muted:#97A6AC;
-  --line:#2A3943; --accent:#4FB7C1; --accent-ink:#0B1418; --signal:#E2AE45; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --paper:#0F171D; --panel:#16222A; --ink:#E4ECEA; --muted:#97A6AC;
-  --line:#2A3943; --accent:#4FB7C1; --accent-ink:#0B1418; --signal:#E2AE45; color-scheme:dark}
-
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-underline-offset:3px}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
-.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-.mono{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-
-header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
-.brand{font-family:var(--display);font-variation-settings:"wdth" 112;font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
-nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
-nav a{color:var(--muted);text-decoration:none;font-size:.92rem}
-nav a:hover{color:var(--ink)}
-@media (max-width:640px){nav{display:none}}
-
-.hero .wrap{padding-block:72px 56px;display:grid;gap:26px}
-.status{display:inline-flex;align-items:center;gap:10px}
-.status i{width:9px;height:9px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 4px color-mix(in srgb,var(--signal) 25%,transparent)}
-h1{font-family:var(--display);font-variation-settings:"wdth" 125;font-weight:800;font-size:clamp(2.6rem,7.4vw,5.6rem);line-height:.98;letter-spacing:-.02em;margin:0;text-wrap:balance}
-h1 span{display:block}
-h1 span:last-child{color:var(--accent)}
-.lede{font-size:1.18rem;max-width:58ch;margin:0}
-.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.btn{display:inline-block;padding:12px 20px;font-weight:600;text-decoration:none;border:1.5px solid var(--accent);font-size:.98rem}
-.btn.primary{background:var(--accent);color:var(--accent-ink)}
-.btn.ghost{color:var(--accent)}
-.where{color:var(--muted);font-size:.95rem}
-
-/* recent work panels */
-.recent{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
-.recent .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding-block:0}
-.proj{padding:30px 26px 32px;border-left:1px solid var(--line);display:grid;gap:10px;align-content:start}
-.proj:first-child{border-left:0;padding-left:0}
-.proj .when{font-family:var(--mono);font-size:.8rem;color:var(--accent);font-variant-numeric:tabular-nums}
-.proj b{font-family:var(--display);font-variation-settings:"wdth" 100;font-weight:700;font-size:2.2rem;line-height:1}
-.proj h3{margin:0;font-size:1.1rem;font-weight:600;line-height:1.3}
-.proj p{margin:0;font-size:.95rem;color:var(--muted)}
-@media (max-width:860px){.recent .wrap{grid-template-columns:1fr}.proj{border-left:0;padding-left:0;padding-right:0}.proj+.proj{border-top:1px solid var(--line)}}
-
-section.block .wrap{display:grid;grid-template-columns:200px minmax(0,1fr);gap:40px;padding-block:72px;border-bottom:1px solid var(--line)}
-.rail{display:grid;gap:8px;align-content:start;position:sticky;top:90px}
-.rail .mono:first-child{color:var(--accent)}
-h2{font-family:var(--display);font-variation-settings:"wdth" 118;font-weight:800;font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.05;margin:0 0 12px;text-wrap:balance}
-.intro{max-width:60ch;color:var(--muted);margin:0 0 32px}
-@media (max-width:760px){section.block .wrap{grid-template-columns:1fr;gap:14px;padding-block:52px}.rail{position:static}}
-
-.services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
-.svc{padding:26px 26px 28px 0;border-bottom:1px solid var(--line);display:grid;gap:8px;align-content:start}
-.svc:nth-child(even){padding-left:26px;padding-right:0;border-left:1px solid var(--line)}
-.svc h3{font-size:1.2rem;margin:0;font-weight:600}
-.svc p{margin:0;font-size:.98rem}
-.svc .proofline{font-size:.88rem;color:var(--muted);border-left:2px solid var(--signal);padding-left:10px}
-@media (max-width:760px){.services{grid-template-columns:1fr}.svc,.svc:nth-child(even){padding:22px 0;border-left:0}}
-
-.modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.mode{border:1px solid var(--line);padding:22px;display:grid;gap:8px;align-content:start}
-.mode h3{margin:0;font-size:1.1rem}
-.mode p{margin:0;font-size:.95rem;color:var(--muted)}
-@media (max-width:860px){.modes{grid-template-columns:1fr}}
-
-.tl{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.tl > li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding:24px 0;border-bottom:1px solid var(--line)}
-.tl .when{font-family:var(--mono);font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px}
-.tl h3{margin:0;font-size:1.12rem;font-weight:600}
-.tl .org{color:var(--accent);font-weight:500}
-.tl .meta{font-size:.88rem;color:var(--muted);margin:2px 0 8px}
-.tl p{margin:0;max-width:66ch;font-size:.98rem}
-.tl ul{margin:8px 0 0;padding-left:18px;max-width:66ch;font-size:.95rem}
-.tl ul li{padding:2px 0}
-@media (max-width:600px){.tl > li{grid-template-columns:1fr;gap:4px}}
-
-.earlier-h{margin:44px 0 6px;font-size:1.05rem;font-weight:600}
-.earlier{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.earlier li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:.95rem}
-.earlier .when{font-family:var(--mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:2px}
-.earlier b{font-weight:600}
-.earlier span.d{color:var(--muted)}
-@media (max-width:600px){.earlier li{grid-template-columns:1fr;gap:2px}}
-
-.quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 40px}
-blockquote{margin:0;display:grid;gap:12px;align-content:start}
-blockquote p{margin:0;font-size:1.02rem;line-height:1.55}
-blockquote p::before{content:"\201C";color:var(--accent);font-family:var(--display);font-weight:800;font-size:1.6em;line-height:0;vertical-align:-.35em;margin-right:4px}
-blockquote footer{font-size:.88rem;color:var(--muted)}
-blockquote footer b{color:var(--ink);font-weight:600}
-@media (max-width:760px){.quotes{grid-template-columns:1fr}}
-
-.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
-.skills h3{font-size:.95rem;margin:0 0 10px;font-weight:600}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips span{font-size:.85rem;padding:4px 10px;background:var(--panel);border:1px solid var(--line)}
-.creds{margin-top:36px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.creds div{display:grid;gap:4px}
-.creds p{margin:0;font-size:.95rem}
-@media (max-width:860px){.skills{grid-template-columns:1fr}.creds{grid-template-columns:1fr}}
-
-.contact{background:var(--ink);color:var(--paper)}
-.contact .wrap{padding-block:72px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px}
-.contact h2{color:var(--paper)}
-.contact p{color:color-mix(in srgb,var(--paper) 80%,var(--ink));max-width:56ch}
-.contact .mono{color:color-mix(in srgb,var(--paper) 65%,var(--ink))}
-.contact ul{margin:0;padding:0;list-style:none;border-top:1px solid color-mix(in srgb,var(--paper) 25%,var(--ink))}
-.contact li{padding:14px 0;border-bottom:1px solid color-mix(in srgb,var(--paper) 25%,var(--ink))}
-.contact .btn.primary{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-@media (max-width:760px){.contact .wrap{grid-template-columns:1fr;padding-block:52px}}
-footer.bottom .wrap{padding-block:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
-
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/word-highlight/moment.js">
+<!-- page CSS: only what sits inside a visual or a list the kit lacks -->
+<style>
+.hero--split .hero__media > picture { position: absolute; inset: 0; }
+.hero--split .hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.work .grid > .card { display: flex; flex-direction: column; gap: var(--s-4); min-height: 400px; }
+.work .card > .t-stat { order: 9; margin-top: auto; font: var(--display-weight) var(--t-stat)/1.1 var(--font-display); letter-spacing: var(--display-tracking); color: var(--ink); }
+.work .card > .t-label { font-size: var(--t-label); color: var(--muted); }
+.card > p:not(.t-label, .t-stat) { color: var(--ink); }
+@media (max-width: 639px) { .work .grid > .card { min-height: 0; } }
+@media (min-width: 640px) and (max-width: 1023px) { .work .grid > .card { min-height: 380px; } #engage .grid > .card { min-height: 300px; } }
+.services-tools .panel { --ground-bg: var(--p-surface); background: var(--p-surface); }
+.roles > li { grid-template-columns: minmax(0, 1fr); }
+.roles .rows__when { color: var(--muted); font-variant-numeric: tabular-nums; }
+.roles .rows__org { font-weight: 400; }
+#experience .group > h3 { font: 500 var(--t-card)/1.3 var(--font-text); letter-spacing: -0.01em; margin-bottom: var(--s-5); }
+.creds { margin-top: var(--s-7); }
+.footer .nav__logo .mark--initial { width: 24px; height: 24px; font-size: 14px; line-height: 1; }
+@media (min-width: 1024px) { .roles--two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gutter); } .roles--two > li:first-child { padding-top: var(--s-4); } }
+@media (max-width: 639px) { .roles > li > p { display: none; } }
+@media (max-width: 639px) { #work, #engage, #services { --hm: 2; } #experience .roles > li { display: block; padding-block: var(--s-2); } #experience .roles .rows__when { display: block; } }
+@media (min-width: 640px) and (max-width: 1023px) { #work, #engage { --h: 2; } #services .services-tools .panel { --p-h: 240px; } }
+@media (max-width: 1279px) { .roles--two > li > p { display: none; } }
+@media (min-width: 640px) and (max-width: 1279px) { .roles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gutter); } .roles > li:first-child { padding-top: var(--s-4); } }
+.creds p { color: var(--ink); }
+.also { margin-top: var(--s-6); max-width: 56ch; }
+.services-tools .panel { --p-h: 420px; }
+@media (max-width: 639px) { .services-tools .panel { --p-h: 300px; } }
+.words { margin-top: var(--s-8); }
+.words blockquote { font-family: var(--font-display); font-size: var(--t-lead); line-height: 1.5; }
+.words .person { margin-top: var(--s-4); color: var(--muted); }
+</style>
 <meta name="build" content="lukerebarchik.com 83a767f838a9 dev">
 </head>
 <body>
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="#top">Luke Rebarchik</a>
-    <nav aria-label="Main"><ul>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#engage">Hire me</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul></nav>
+<!-- type: service (kind service; site-kind other)
+     deal: hero split (dealt film first; no film and no strong photograph, so dealt again), nav nav-centre,
+     close close-type (close-photo needs a second photograph), footer footer-columns (footer-visit needs a door),
+     rhythm space, buttons arrow, mark initial, palette: client brand colours (replaced the dealt sky-sand), type source-serif (rethink failed hero-lines), radius soft, grounds none
+     moments: word-highlight in #record -->
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="#top"><span class="mark mark--initial" aria-hidden="true">L</span>Luke Rebarchik</a>
+    <nav class="nav__links" id="main-nav" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="#work">Work</a></div>
+      <div class="nav__item"><a class="nav__link" href="#services">Services</a></div>
+      <div class="nav__item"><a class="nav__link" href="#experience">Experience</a></div>
+      <div class="nav__item"><a class="nav__link" href="#engage">Hiring</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="https://www.linkedin.com/in/lrebarchik/" target="_blank" rel="noopener">Message me on LinkedIn</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </header>
 
 <main id="top">
-  <section class="hero">
-    <div class="wrap">
-      <div class="status mono"><i aria-hidden="true"></i>Available now · Contract &amp; fractional</div>
-      <h1><span>Data systems.</span><span>Modern web services.</span><span>Rebuilt right.</span></h1>
-      <p class="lede">Senior solutions architect. Most recently I led planning and development for a complete overhaul of the Illinois Department of Children and Family Services' internal data systems. Before that, four years at Northern Trust, ending as VP of Public Websites.</p>
-      <div class="cta">
-        <a class="btn primary" href="#contact">Start a conversation</a>
-        <a class="btn ghost" href="https://www.linkedin.com/in/lrebarchik/" target="_blank" rel="noopener">LinkedIn profile</a>
+  <section class="hero hero--split" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text grid hero__grid">
+      <div class="hero__text span-5">
+        <p class="hero__kicker"><span class="dot" aria-hidden="true"></span>Available now for contract and fractional work</p>
+        <h1 id="hero-h">Solutions architect for platform rebuilds</h1>
+        <p class="hero__lead">I plan and lead the replacement of systems people rely on, most recently the $9.3M+ overhaul of Illinois DCFS call center data systems.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="https://www.linkedin.com/in/lrebarchik/" target="_blank" rel="noopener">Message me on LinkedIn<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+          <a class="btn btn--secondary" href="#work">See recent work</a>
+        </div>
       </div>
-      <div class="where">Wilmette, IL · Hybrid or remote · 25+ years leading technology teams</div>
+      <div class="hero__media span-6 start-7">
+        <picture>
+          <source type="image/avif" srcset="img/web/luke-2026-portrait-400.avif 400w, img/web/luke-2026-portrait-700.avif 700w, img/web/luke-2026-portrait-1122.avif 1122w" sizes="(max-width: 639px) 342px, 628px">
+          <source type="image/webp" srcset="img/web/luke-2026-portrait-400.webp 400w, img/web/luke-2026-portrait-700.webp 700w, img/web/luke-2026-portrait-1122.webp 1122w" sizes="(max-width: 639px) 342px, 628px">
+          <!-- eslint-disable-next-line @html-eslint/use-baseline -- fetchpriority is a hint; ignored where unsupported -->
+          <img src="img/web/luke-2026-portrait-700.webp" width="700" height="875" alt="Luke Rebarchik in a dark blazer and blue shirt, smiling" fetchpriority="high" data-source="client" data-subject="Luke Rebarchik">
+        </picture>
+        <div class="ly-float">
+          <div class="ly-float__row"><span>Wilmette, IL</span><span>Hybrid or remote</span></div>
+          <div class="ly-float__title">25+ years leading technology teams</div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section work" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="work-h">Recent architecture programs</h2>
+        <p>Three programs from the last nine years: a state agency, a bank and a media company.</p>
+      </div>
+      <div class="grid">
+        <article class="card span-4">
+          <span class="ic-tile"><svg class="ic ic-svg ic-24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></g></svg></span>
+          <p class="t-label">2024 to 2026</p>
+          <p class="t-stat">$9.3M+</p>
+          <h3>Illinois DCFS modernization</h3>
+          <p>Senior solutions architect with Krasan Consulting, leading development and planning for an overhaul of the department's call center data systems.</p>
+        </article>
+        <article class="card span-4">
+          <span class="ic-tile"><svg class="ic ic-svg ic-24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20a14.5 14.5 0 0 0 0-20M2 12h20"/></g></svg></span>
+          <p class="t-label">2019 to 2024</p>
+          <p class="t-stat">VP</p>
+          <h3>Northern Trust public websites</h3>
+          <p>Joined on contract, converted to lead architect, then VP of Public Websites, responsible for www.northerntrust.com.</p>
+        </article>
+        <article class="card span-4">
+          <span class="ic-tile"><svg class="ic ic-svg ic-24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M15 18h-5m8-4h-8m-6 8h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="10" y="6" rx="1"/></g></svg></span>
+          <p class="t-label">2017 to 2019</p>
+          <p class="t-stat">44M+</p>
+          <h3>Farm Journal media platforms</h3>
+          <p>Infrastructure behind 44 million monthly engagements across the company's websites, newsletters, apps and paid data products.</p>
+        </article>
+      </div>
     </div>
   </section>
 
-  <div class="recent" aria-label="Recent work">
+  <section class="section statement" id="record" data-moment="word-highlight" aria-label="Track record">
     <div class="wrap">
-      <div class="proj">
-        <span class="when">2024 – 2026</span>
-        <b>Illinois DCFS</b>
-        <h3>$9.3M+ modernization and digital transformation</h3>
-        <p>Senior Solutions Architect on a large team of talented consultants from Krasan Consulting, and other providers. Development & M/O for a complete overhaul of Illinois DCFS call center data systems.</p>
-      </div>
-      <div class="proj">
-        <span class="when">2019 – 2024</span>
-        <b>Northern Trust</b>
-        <h3>Contractor to VP of Public Websites</h3>
-        <p>Joined on contract, converted to Lead Solutions Architect, then promoted to Senior Solutions Architect, VP of Public Websites, primary responsible party for www.northerntrust.com, a multi-billion dollar bank's front door.</p>
-      </div>
-      <div class="proj">
-        <span class="when">2017 – 2019</span>
-        <b>44M+</b>
-        <h3>Monthly engagements at Farm Journal</h3>
-        <p>Designed and supported the infrastructure behind the company's websites, newsletters, apps and paid data products.</p>
-      </div>
+      <p class="t-label">Since 1997</p>
+      <p class="mo-wh__text">I rebuild the systems an organization <strong>cannot switch off</strong>: a state agency's call center data, a bank's public front door, and the platforms behind a media company's 44 million monthly engagements.</p>
     </div>
-  </div>
+  </section>
 
-  <section class="block" id="services">
+  <section class="section" id="services" aria-labelledby="services-h">
     <div class="wrap">
-      <div class="rail"><span class="mono">Services</span><span class="mono">What I do</span></div>
-      <div>
-        <h2>What I do</h2>
-        <p class="intro">Four things, each backed by work I've led.</p>
-        <div class="services">
-          <div class="svc">
-            <h3>Overhaul data systems</h3>
-            <p>Plan the replacement and lead the build.</p>
-            <div class="proofline">Illinois DCFS (2024–2026)</div>
+      <div class="grid services-tools">
+        <div class="span-5">
+          <div class="section-head">
+            <h2 id="services-h">Architecture services for large platforms</h2>
+            <p>Four kinds of work, each backed by a program I led.</p>
           </div>
-          <div class="svc">
-            <h3>Run enterprise web platforms</h3>
-            <p>Architecture, configuration, performance and security for large public web estates.</p>
-            <div class="proofline">Northern Trust public websites; Farm Journal's 44M+ monthly engagements</div>
-          </div>
-          <div class="svc">
-            <h3>Bring in DevOps</h3>
-            <p>Docker, automated testing and deployment automation for local and international teams.</p>
-            <div class="proofline">Farm Journal Media</div>
-          </div>
-          <div class="svc">
-            <h3>Choose and launch CRM</h3>
-            <p>Vendor selection, RFPs, implementation and adoption.</p>
-            <div class="proofline">SuiteCRM at Farm Journal; Microsoft Dynamics CRM at BYU</div>
-          </div>
+          <ul class="rows">
+            <li><span class="rows__name">Overhaul data systems</span><p>Plan the replacement and lead the build.</p></li>
+            <li><span class="rows__name">Run enterprise web platforms</span><p>Architecture, performance and security for large public web estates.</p></li>
+            <li><span class="rows__name">Bring in DevOps</span><p>Docker, automated testing and deployment automation for local and international teams.</p></li>
+            <li><span class="rows__name">Choose and launch a CRM</span><p>Vendor selection, RFPs, implementation and adoption.</p></li>
+          </ul>
+        </div>
+        <div class="span-6 start-7" id="skills">
+          <div class="panel"><div class="dg" data-diagram='{"layout":"hub","alt":"Tools Luke Rebarchik works with: AWS, Microsoft Azure, Docker, Git, content management systems, CRM systems, Salesforce and Tableau.","ground":"none","motion":{"pulse":"none"},"center":{"label":"Toolkit"},"spokes":[{"label":"AWS","icon":"aws"},{"label":"Azure","icon":"azure"},{"label":"Docker","icon":"docker"},{"label":"Git","icon":"logos:git-icon"},{"label":"CMS","icon":"ui:layout-template"},{"label":"CRM","icon":"ui:contact"},{"label":"Salesforce","icon":"salesforce"},{"label":"Tableau","icon":"tableau"}]}'></div></div>
+          <p class="also">Also Drupal, WordPress, SQL Server, .NET, Microsoft Dynamics CRM, SuiteCRM, Composer, Google Analytics, JavaScript and WCAG audits.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="block" id="experience">
+  <section class="section g2" id="experience" aria-labelledby="experience-h">
     <div class="wrap">
-      <div class="rail"><span class="mono">Experience</span><span class="mono">Last 9 years</span></div>
-      <div>
-        <h2>Recent roles</h2>
-        <p class="intro">2017 to 2026, most recent first.</p>
-        <ol class="tl">
-          <li>
-            <div class="when">Jul 2024 – Apr 2026</div>
-            <div>
-              <h3>Senior Solutions Architect · <span class="org">Krasan Consulting Services</span></h3>
-              <div class="meta">Contract · Chicago, IL · Hybrid</div>
-              <p>Led development and planning for the Illinois Department of Children and Family Services in a complete overhaul of their internal data systems.</p>
-            </div>
-          </li>
-          <li>
-            <div class="when">Jul 2019 – Jan 2024</div>
-            <div>
-              <h3>Senior Solutions Architect, VP of Public Websites · <span class="org">Northern Trust</span></h3>
-              <div class="meta">Chicago, IL</div>
-              <ul>
-                <li>Senior Solutions Architect, VP of Public Websites, Jul 2020 – Jan 2024</li>
-                <li>Lead Solutions Architect, Nov 2019 – Jul 2020</li>
-                <li>Solutions Architect on contract through Swoon, Jul – Nov 2019, then converted to full-time</li>
-              </ul>
-            </div>
-          </li>
-          <li>
-            <div class="when">Mar 2019 – Jul 2019</div>
-            <div>
-              <h3>Associate Director of Web Development · <span class="org">Rise Interactive</span></h3>
-              <div class="meta">Chicago, IL</div>
-            </div>
-          </li>
-          <li>
-            <div class="when">Jan 2019 – Mar 2019</div>
-            <div>
-              <h3>Software Development Manager · <span class="org">Photon</span></h3>
-              <div class="meta">Deerfield, IL</div>
-              <p>Built a developer documentation suite directly with Discover Financial Services.</p>
-            </div>
-          </li>
-          <li>
-            <div class="when">Jul 2017 – Jan 2019</div>
-            <div>
-              <h3>Solutions Architect · <span class="org">Farm Journal Media</span></h3>
-              <div class="meta">Chicago, IL · Started as Lead Web Developer (Drupal), promoted Mar 2018</div>
-              <ul>
-                <li>Infrastructure for 44+ million monthly engagements on Drupal 8 and SuiteCRM.</li>
-                <li>Oversaw multiple international development teams.</li>
-                <li>Introduced Docker workflows, Composer packaging, unit testing and deployment automation.</li>
-                <li>Advised on the CRM implementation.</li>
-              </ul>
-            </div>
-          </li>
+      <div class="group">
+        <div class="section-head">
+          <h2 id="experience-h">Roles from 2017 to 2026</h2>
+        </div>
+        <ol class="rows roles">
+          <li><span class="rows__when t-label">Jul 2024 to Apr 2026</span><span class="rows__name">Senior Solutions Architect <span class="rows__org">at Krasan Consulting Services</span></span><p>Contract, Chicago, hybrid. Led development and planning for the Illinois Department of Children and Family Services' data systems overhaul.</p></li>
+          <li><span class="rows__when t-label">Jul 2019 to Jan 2024</span><span class="rows__name">Senior Solutions Architect, VP of Public Websites <span class="rows__org">at Northern Trust</span></span><p>Contract through Swoon from Jul 2019, Lead Solutions Architect from Nov 2019, VP of Public Websites from Jul 2020.</p></li>
+          <li><span class="rows__when t-label">Mar 2019 to Jul 2019</span><span class="rows__name">Associate Director of Web Development <span class="rows__org">at Rise Interactive</span></span><p>Chicago.</p></li>
+          <li><span class="rows__when t-label">Jan 2019 to Mar 2019</span><span class="rows__name">Software Development Manager <span class="rows__org">at Photon</span></span><p>Built a developer documentation suite with Discover Financial Services.</p></li>
+          <li><span class="rows__when t-label">Jul 2017 to Jan 2019</span><span class="rows__name">Solutions Architect <span class="rows__org">at Farm Journal Media</span></span><p>Lead Drupal developer, promoted in Mar 2018. Drupal 8 and SuiteCRM for 44M+ monthly engagements; Docker and deployment automation for international teams.</p></li>
         </ol>
-
-        <h3 class="earlier-h">Earlier career</h3>
-        <ul class="earlier">
-          <li><span class="when">2011 – 2017</span><span><b>BYU Independent Study</b>, Website Administrator &amp; Business Process Manager. <span class="d">Led the group building Drupal and WordPress modules for all campus sites (35,000+ students). Content problems cut 3x, from 403 to 133. Product hits up 12%+ quarter over quarter.</span></span></li>
-          <li><span class="when">2010 – 2011</span><span><b>Five Star Franchising</b>, Sr. Software and Web Content Designer. <span class="d">Project-managed the SaaS replacement for a .NET CRM and quoting app.</span></span></li>
-          <li><span class="when">2002 – 2010</span><span><b>rWorld Solutions</b>, Co-Founder. <span class="d">Technical consulting and data solutions, including CRM integration.</span></span></li>
-          <li><span class="when">2004 – 2009</span><span><b>Brigham Young University</b>, IT/Data Consultant. <span class="d">Ticketing systems and Visa PCI compliance review.</span></span></li>
-          <li><span class="when">2002 – 2003</span><span><b>Brighton Marketing</b>, Software Developer. <span class="d">Price-tracking data system.</span></span></li>
-          <li><span class="when">1997 – 1999</span><span><b>Apex Interactive</b>, Web Developer and Designer. <span class="d">First-generation e-commerce shopping carts.</span></span></li>
+      </div>
+      <div class="group">
+        <h3>Earlier career</h3>
+        <ul class="rows roles roles--two">
+          <li><span class="rows__when t-label">2011 to 2017</span><span class="rows__name">Website Administrator and Business Process Manager <span class="rows__org">at BYU Independent Study</span></span><p>Led Drupal and WordPress module work for all campus sites (35,000+ students). Content problems cut from 403 to 133.</p></li>
+          <li><span class="rows__when t-label">2010 to 2011</span><span class="rows__name">Sr. Software and Web Content Designer <span class="rows__org">at Five Star Franchising</span></span><p>Project-managed the SaaS replacement for a .NET CRM and quoting app.</p></li>
+          <li><span class="rows__when t-label">2004 to 2009</span><span class="rows__name">IT and Data Consultant <span class="rows__org">at Brigham Young University</span></span><p>Ticketing systems and Visa PCI compliance review.</p></li>
+          <li><span class="rows__when t-label">2002 to 2010</span><span class="rows__name">Co-Founder <span class="rows__org">at rWorld Solutions</span></span><p>Technical consulting and data solutions, including CRM integration.</p></li>
+          <li><span class="rows__when t-label">2002 to 2003</span><span class="rows__name">Software Developer <span class="rows__org">at Brighton Marketing</span></span><p>Price-tracking data system.</p></li>
+          <li><span class="rows__when t-label">1997 to 1999</span><span class="rows__name">Web Developer and Designer <span class="rows__org">at Apex Interactive</span></span><p>First-generation e-commerce shopping carts.</p></li>
         </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="engage">
-    <div class="wrap">
-      <div class="rail"><span class="mono">Engagement</span><span class="mono">How to hire me</span></div>
-      <div>
-        <h2>Three ways to hire me</h2>
-        <p class="intro">Pick what fits your budget and timeline.</p>
-        <div class="modes">
-          <div class="mode"><span class="mono">Contract</span><h3>On your team</h3><p>Full-time contract. Chicago-area hybrid or remote.</p></div>
-          <div class="mode"><span class="mono">Fractional</span><h3>A few days a week</h3><p>Senior architecture without a full-time hire.</p></div>
-          <div class="mode"><span class="mono">Project</span><h3>Fixed-scope review</h3><p>An assessment of your architecture, platform or rollout, with a written recommendation.</p></div>
+        <div class="grid creds">
+          <div class="span-6"><p class="t-label">Education</p><p>Brigham Young University, BA, Theatre Arts Management and Acting</p></div>
+          <div class="span-6"><p class="t-label">Languages</p><p>English (native), German (professional working proficiency)</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="block" id="recommend">
+  <section class="section" id="engage" aria-labelledby="engage-h">
     <div class="wrap">
-      <div class="rail"><span class="mono">Recommendations</span><span class="mono">BYU colleagues</span></div>
-      <div>
-        <h2>In their words</h2>
-        <div class="quotes">
-          <blockquote>
-            <p>Luke is an exceptional collaborator who excels at reaching across departments and programs to develop truly innovat[iv]e solutions and bring people together in pursuit of a shared vision.</p>
-            <footer><b>Wendy Simmerman</b> · Head of Tutors &amp; TAs, BYU Independent Study</footer>
-          </blockquote>
-          <blockquote>
-            <p>Luke constantly searches for more efficient means to accomplishing tasks and collecting meaningful data. He is consistent in his search for a clear direction and path to accomplish the big picture.</p>
-            <footer><b>Brian Pendleton</b> · Educational Services Administrator, Brigham Young University</footer>
-          </blockquote>
-        </div>
+      <div class="section-head">
+        <h2 id="engage-h">Contract, fractional or project terms</h2>
+        <p>Pick what fits your budget and timeline. Chicago-area hybrid or remote.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="block" id="skills">
-    <div class="wrap">
-      <div class="rail"><span class="mono">Toolkit</span></div>
-      <div>
-        <h2>Toolkit</h2>
-        <div class="skills">
-          <div><h3>Cloud and delivery</h3><div class="chips"><span>AWS</span><span>Microsoft Azure</span><span>DevOps</span><span>Docker</span><span>Composer</span><span>Git</span><span>Automated testing</span></div></div>
-          <div><h3>Platforms and CRM</h3><div class="chips"><span>Drupal 8</span><span>WordPress</span><span>SuiteCRM</span><span>Microsoft Dynamics CRM</span><span>Salesforce</span><span>.NET</span><span>SQL Server</span></div></div>
-          <div><h3>Practice</h3><div class="chips"><span>Project management</span><span>System architecture</span><span>JavaScript</span><span>Google Analytics</span><span>Tableau</span><span>WCAG</span></div></div>
-        </div>
-        <div class="creds">
-          <div><span class="mono">Education</span><p>Brigham Young University, BA, Theatre Arts Management / Acting</p></div>
-          <div><span class="mono">Languages</span><p>English (native) · German (professional working proficiency)</p></div>
-        </div>
+      <div class="grid">
+        <div class="card span-4"><span class="ic-tile"><svg class="ic ic-svg ic-24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M16 3.128a4 4 0 0 1 0 7.744M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></g></svg></span><p class="t-label">Contract</p><h3>On your team</h3><p>A full-time contract on your program, from planning through launch.</p></div>
+        <div class="card span-4"><span class="ic-tile"><svg class="ic ic-svg ic-24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M8 2v4m8-4v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></g></svg></span><p class="t-label">Fractional</p><h3>A few days a week</h3><p>Senior architecture without a full-time hire.</p></div>
+        <div class="card span-4"><span class="ic-tile"><svg class="ic ic-svg ic-24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14l2 2l4-4"/></g></svg></span><p class="t-label">Project</p><h3>A fixed-scope review</h3><p>An assessment of your architecture, platform or rollout, with a written recommendation.</p></div>
       </div>
-    </div>
-  </section>
-
-  <section class="contact" id="contact">
-    <div class="wrap">
-      <div>
-        <span class="mono">Contact</span>
-        <h2>Let's talk.</h2>
-        <p>Message me on LinkedIn with what you're working on and the technologies involved.</p>
-        <div class="cta"><a class="btn primary" href="https://www.linkedin.com/in/lrebarchik/" target="_blank" rel="noopener">Message me on LinkedIn</a></div>
-      </div>
-      <div>
-        <span class="mono">Reach out about</span>
-        <ul>
-          <li>A contract or fractional architect role</li>
-          <li>A system or platform decision</li>
-          <li>Professional references</li>
-        </ul>
+      <h3 class="sr-only" id="recommend-h">Recommendations</h3>
+      <div class="grid words" id="recommend" role="group" aria-labelledby="recommend-h">
+        <figure class="span-6">
+          <blockquote>Luke is an exceptional collaborator who excels at reaching across departments and programs to develop truly innovative solutions and bring people together in pursuit of a shared vision.</blockquote>
+          <figcaption class="person">Wendy Simmerman, Head of Tutors and TAs, BYU Independent Study</figcaption>
+        </figure>
+        <figure class="span-6">
+          <blockquote>Luke constantly searches for more efficient means to accomplishing tasks and collecting meaningful data. He is consistent in his search for a clear direction and path to accomplish the big picture.</blockquote>
+          <figcaption class="person">Brian Pendleton, Educational Services Administrator, Brigham Young University</figcaption>
+        </figure>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="bottom">
-  <div class="wrap mono"><span>© 2026 Luke Rebarchik</span><span>Wilmette, Illinois</span></div>
+<footer class="footer closing g2m" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head">
+        <h2 id="close-h">Message me about your platform</h2>
+        <p>Send what you're working on and the technologies involved. A contract or fractional role, a system decision, or a reference request.</p>
+      </div>
+      <a class="btn btn--primary btn--xl" href="https://www.linkedin.com/in/lrebarchik/" target="_blank" rel="noopener">Message me on LinkedIn<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top"><span class="mark mark--initial" aria-hidden="true">L</span>Luke Rebarchik</a>
+          <p class="footer__lede">Solutions architect in Wilmette, Illinois</p>
+        </div>
+        <div class="span-2 footer__col"><h3>Work</h3><ul><li><a href="#work">Recent work</a></li><li><a href="#record">Track record</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Services</h3><ul><li><a href="#services">What I do</a></li><li><a href="#skills">Toolkit</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Experience</h3><ul><li><a href="#experience">Roles</a></li><li><a href="#recommend">Recommendations</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Hiring</h3><ul><li><a href="#engage">Ways to hire</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Luke Rebarchik. Product names and logos are trademarks of their owners.</span>
+      </div>
+    </div>
+  </div>
 </footer>
 
+<nav class="actionbar" aria-label="Quick actions">
+  <a class="btn btn--primary" href="https://www.linkedin.com/in/lrebarchik/" target="_blank" rel="noopener">Message me on LinkedIn</a>
+</nav>
+
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+<script type="module" src="assets/diagrams/mount.js"></script>
 <!-- build: lukerebarchik.com 83a767f838a9 dev -->
 </body>
 </html>
